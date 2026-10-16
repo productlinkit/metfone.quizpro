@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizy Flash</title>
+    <link rel="stylesheet" href="../../theme/css/bootstrap.min.css?v=red6">
+    <link rel="stylesheet" href="../../theme/fontello/css/quizy-flash.css">
+    <link rel="stylesheet" href="../../theme/css/style.css?v=red6">
+    <link rel="stylesheet" href="../../theme/css/profile.css?v=red6">
+    <link rel="stylesheet" href="../../theme/css/pages.css?v=red6">
+    <link rel="stylesheet" href="../../theme/floating-copy/css/style.css">
+    <link rel="stylesheet" href="../../ext/cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="shortcut icon" type="image/x-icon" href="../../theme/images/favicon-quizpro.ico">
+</head>
+<body>
+    <div class="content-wrapper">
+
+        
+    <div class="content-wrapper">
+
+        <div class="page-header">
+            <div class="box-wrapper mx-auto text-center position-relative">
+                <a href="../../profile/index.html" class="page-header-back"><span class="qf-icon-back"></span></a>
+                Edit Profile
+            </div>
+        </div>
+
+        <div class="text-center mb-3">
+            <div class="avatar">
+                                                                <img src="../../theme/images/dp.png" data-user-avatar alt="Avatar">
+            </div>
+        </div>
+
+        <div class="container box-wrapper">
+
+
+            <div class="card-simple">
+                <form action="#" class="form" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="_token" value="CSRF_PLACEHOLDER"> <input type="hidden" name="user_id" value="2">
+                    <div class="mb-3">
+                        <label class="fw-bold form-label" for="avatar">Avatar</label>
+                        <input type="file" class="form-control-file" id="avatar" name="avatar">
+                    </div>
+                    <div class="mb-3">
+                        <label class="fw-bold form-label" for="username">Name</label>
+                        <input type="text" class="form-control shadow-sm" placeholder="Name" name="username" id="username" value="">
+                    </div>
+
+                    <button type="submit" class="btn btn-lg button-primary w-100">Save</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    
+
+    </div>
+
+    <!-- Login Model Start -->
+    <div class="modal fade modal-standard" tabindex="-1" role="dialog" id="modalplay">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background: #E31C23;">
+                    <img src="../../theme/images/logo_quizypro.png" width="80" alt="Logo">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="mb-0">Please login first to continue</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary shadow-sm" data-bs-dismiss="modal" aria-label="Close">Close</button>
+                    <a href="../../login/index.html" class="btn button-green shadow-sm">Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Login Model End -->
+
+    
+    <script src="../../ext/code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="../../theme/js/session.js?v=1"></script>
+    <script src="../../theme/js/i18n.js?v=1"></script>
+    <script src="../../theme/js/bootstrap.bundle.min.js"></script>
+    <script src="../../theme/js/custom.js?v=login2"></script>
+</body>
+</html>

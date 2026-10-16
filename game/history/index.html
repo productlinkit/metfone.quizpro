@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizy Flash</title>
+    <link rel="stylesheet" href="../../theme/css/bootstrap.min.css?v=red6">
+    <link rel="stylesheet" href="../../theme/fontello/css/quizy-flash.css">
+    <link rel="stylesheet" href="../../theme/css/style.css?v=red6">
+    <link rel="stylesheet" href="../../theme/css/profile.css?v=red6">
+    <link rel="stylesheet" href="../../theme/css/pages.css?v=red6">
+    <link rel="stylesheet" href="../../theme/floating-copy/css/style.css">
+    <link rel="stylesheet" href="../../ext/cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="shortcut icon" type="image/x-icon" href="../../theme/images/favicon-quizpro.ico">
+</head>
+<body>
+    <div class="content-wrapper">
+
+            <div class="content-wrapper">
+
+        <div class="page-header">
+            <div class="box-wrapper mx-auto text-center position-relative">
+                <a href="../../profile/index.html" class="page-header-back"><span class="qf-icon-back"></span></a>
+                Game History
+            </div>
+        </div>
+
+                <div class="container box-wrapper">
+            <div class="hist-tools">
+                <div class="hist-search">
+                    <span class="qf-icon-search"></span>
+                    <input type="search" id="histSearch" placeholder="Search quiz or level..." autocomplete="off">
+                </div>
+                <div class="hist-chips" id="histRange" role="group" aria-label="Date range">
+                    <button type="button" class="active" data-range="all">All</button>
+                    <button type="button" data-range="today">Today</button>
+                    <button type="button" data-range="7">7 days</button>
+                    <button type="button" data-range="30">30 days</button>
+                    <button type="button" data-range="custom"><span class="fa fa-calendar"></span> Custom</button>
+                </div>
+                <div class="hist-dates" id="histDates" hidden>
+                    <label>From <input type="date" id="histFrom"></label>
+                    <label>To <input type="date" id="histTo"></label>
+                </div>
+            </div>
+            <div class="hist-count" id="histCount"></div>
+            <div class="card-simple-outer">
+                <ul class="history">
+                                            <li class="history-list">
+                            <div class="row gx-0">
+                                <div class="col-9">
+                                    <div class="d-flex w-100">
+                                        <div class="history-list-pict">
+
+                                                                                                                                                                    <img src="../../images/category/1/icon/1_01122022_icon_image.png" alt="Images">
+
+                                        </div>
+
+                                        <div class="history-list-info">
+                                            <h4 class="history-list-info-name">Sports</h4>
+                                                                                        <div class="history-list-info-stats">
+                                                Intermediate, Score <b>10</b>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3 text-end">
+                                                                        <span class="history-list-date">2026-10-01</span>
+                                </div>
+                            </div>
+                        </li>
+                                            <li class="history-list">
+                            <div class="row gx-0">
+                                <div class="col-9">
+                                    <div class="d-flex w-100">
+                                        <div class="history-list-pict">
+
+                                                                                                                                                                    <img src="../../images/category/25/icon/25_01122022_icon_image.png" alt="Images">
+
+                                        </div>
+
+                                        <div class="history-list-info">
+                                            <h4 class="history-list-info-name">Science</h4>
+                                                                                        <div class="history-list-info-stats">
+                                                Beginner, Score <b>20</b>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3 text-end">
+                                                                        <span class="history-list-date">2026-09-25</span>
+                                </div>
+                            </div>
+                        </li>
+                                            <li class="history-list">
+                            <div class="row gx-0">
+                                <div class="col-9">
+                                    <div class="d-flex w-100">
+                                        <div class="history-list-pict">
+
+                                                                                                                                                                    <img src="../../images/category/1/icon/1_01122022_icon_image.png" alt="Images">
+
+                                        </div>
+
+                                        <div class="history-list-info">
+                                            <h4 class="history-list-info-name">Sports</h4>
+                                                                                        <div class="history-list-info-stats">
+                                                Beginner, Score <b>30</b>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3 text-end">
+                                                                        <span class="history-list-date">2026-09-21</span>
+                                </div>
+                            </div>
+                        </li>
+                                            <li class="history-list">
+                            <div class="row gx-0">
+                                <div class="col-9">
+                                    <div class="d-flex w-100">
+                                        <div class="history-list-pict">
+
+                                                                                                                                                                    <img src="../../images/category/1/icon/1_01122022_icon_image.png" alt="Images">
+
+                                        </div>
+
+                                        <div class="history-list-info">
+                                            <h4 class="history-list-info-name">Sports</h4>
+                                                                                        <div class="history-list-info-stats">
+                                                Beginner, Score <b>10</b>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3 text-end">
+                                                                        <span class="history-list-date">2026-09-21</span>
+                                </div>
+                            </div>
+                        </li>
+                                            <li class="history-list">
+                            <div class="row gx-0">
+                                <div class="col-9">
+                                    <div class="d-flex w-100">
+                                        <div class="history-list-pict">
+
+                                                                                                                                                                    <img src="../../images/category/25/icon/25_01122022_icon_image.png" alt="Images">
+
+                                        </div>
+
+                                        <div class="history-list-info">
+                                            <h4 class="history-list-info-name">Science</h4>
+                                                                                        <div class="history-list-info-stats">
+                                                Beginner, Score <b>20</b>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3 text-end">
+                                                                        <span class="history-list-date">2026-09-02</span>
+                                </div>
+                            </div>
+                        </li>
+                                            <li class="history-list">
+                            <div class="row gx-0">
+                                <div class="col-9">
+                                    <div class="d-flex w-100">
+                                        <div class="history-list-pict">
+
+                                                                                                                                                                    <img src="../../images/category/25/icon/25_01122022_icon_image.png" alt="Images">
+
+                                        </div>
+
+                                        <div class="history-list-info">
+                                            <h4 class="history-list-info-name">Science</h4>
+                                                                                        <div class="history-list-info-stats">
+                                                Beginner, Score <b>30</b>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3 text-end">
+                                                                        <span class="history-list-date">2026-08-28</span>
+                                </div>
+                            </div>
+                        </li>
+                                            <li class="history-list">
+                            <div class="row gx-0">
+                                <div class="col-9">
+                                    <div class="d-flex w-100">
+                                        <div class="history-list-pict">
+
+                                                                                                                                                                    <img src="../../images/category/25/icon/25_01122022_icon_image.png" alt="Images">
+
+                                        </div>
+
+                                        <div class="history-list-info">
+                                            <h4 class="history-list-info-name">Science</h4>
+                                                                                        <div class="history-list-info-stats">
+                                                Beginner, Score <b>30</b>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3 text-end">
+                                                                        <span class="history-list-date">2026-08-28</span>
+                                </div>
+                            </div>
+                        </li>
+                                            <li class="history-list">
+                            <div class="row gx-0">
+                                <div class="col-9">
+                                    <div class="d-flex w-100">
+                                        <div class="history-list-pict">
+
+                                                                                                                                                                    <img src="../../images/category/25/icon/25_01122022_icon_image.png" alt="Images">
+
+                                        </div>
+
+                                        <div class="history-list-info">
+                                            <h4 class="history-list-info-name">Science</h4>
+                                                                                        <div class="history-list-info-stats">
+                                                Advance, Score <b>10</b>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3 text-end">
+                                                                        <span class="history-list-date">2026-08-28</span>
+                                </div>
+                            </div>
+                        </li>
+                                            <li class="history-list">
+                            <div class="row gx-0">
+                                <div class="col-9">
+                                    <div class="d-flex w-100">
+                                        <div class="history-list-pict">
+
+                                                                                                                                                                    <img src="../../images/category/25/icon/25_01122022_icon_image.png" alt="Images">
+
+                                        </div>
+
+                                        <div class="history-list-info">
+                                            <h4 class="history-list-info-name">Science</h4>
+                                                                                        <div class="history-list-info-stats">
+                                                Intermediate, Score <b>20</b>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3 text-end">
+                                                                        <span class="history-list-date">2026-08-28</span>
+                                </div>
+                            </div>
+                        </li>
+                                            <li class="history-list">
+                            <div class="row gx-0">
+                                <div class="col-9">
+                                    <div class="d-flex w-100">
+                                        <div class="history-list-pict">
+
+                                                                                                                                                                    <img src="../../images/category/21/icon/21_01122022_icon_image.png" alt="Images">
+
+                                        </div>
+
+                                        <div class="history-list-info">
+                                            <h4 class="history-list-info-name">Movies &amp; Music</h4>
+                                                                                        <div class="history-list-info-stats">
+                                                Beginner, Score <b>60</b>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3 text-end">
+                                                                        <span class="history-list-date">2026-08-07</span>
+                                </div>
+                            </div>
+                        </li>
+                                    </ul>
+                <div class="hist-empty" id="histEmpty" hidden>
+                    <span class="qf-icon-search"></span>
+                    <p>No games found</p>
+                    <button type="button" id="histReset">Reset filters</button>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+
+    </div>
+
+    <!-- Login Model Start -->
+    <div class="modal fade modal-standard" tabindex="-1" role="dialog" id="modalplay">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background: #E31C23;">
+                    <img src="../../theme/images/logo_quizypro.png" width="80" alt="Logo">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="mb-0">Please login first to continue</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary shadow-sm" data-bs-dismiss="modal" aria-label="Close">Close</button>
+                    <a href="../../login/index.html" class="btn button-green shadow-sm">Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Login Model End -->
+
+    
+    <script src="../../ext/code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="../../theme/js/session.js?v=1"></script>
+    <script src="../../theme/js/i18n.js?v=1"></script>
+    <script src="../../theme/js/bootstrap.bundle.min.js"></script>
+    <script src="../../theme/js/custom.js?v=login2"></script>
+    <script>
+    (function () {
+        var rows = Array.prototype.slice.call(document.querySelectorAll('.history-list')).map(function (li) {
+            return { li: li, date: li.querySelector('.history-list-date').textContent.trim(), text: li.textContent.toLowerCase().replace(/\s+/g, ' ') };
+        });
+        var q = document.getElementById('histSearch'), range = 'all';
+        var from = document.getElementById('histFrom'), to = document.getElementById('histTo'), dates = document.getElementById('histDates');
+        function iso(d) { return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+        function daysAgo(n) { var d = new Date(); d.setDate(d.getDate() - n); return iso(d); }
+        function apply() {
+            var term = q.value.trim().toLowerCase(), lo = '', hi = '9999';
+            if (range === 'today') lo = iso(new Date());
+            else if (range === '7') lo = daysAgo(6);
+            else if (range === '30') lo = daysAgo(29);
+            else if (range === 'custom') { lo = from.value || ''; hi = to.value || '9999'; }
+            var shown = 0;
+            rows.forEach(function (r) {
+                var ok = (!term || r.text.indexOf(term) !== -1) && r.date >= lo && r.date <= hi;
+                r.li.hidden = !ok; if (ok) shown++;
+            });
+            document.getElementById('histCount').textContent = shown + ' of ' + rows.length + ' games';
+            document.getElementById('histEmpty').hidden = shown > 0;
+        }
+        document.getElementById('histRange').addEventListener('click', function (e) {
+            var b = e.target.closest('button'); if (!b) return;
+            range = b.getAttribute('data-range');
+            this.querySelectorAll('button').forEach(function (x) { x.classList.toggle('active', x === b); });
+            dates.hidden = range !== 'custom';
+            apply();
+        });
+        [q, from, to].forEach(function (el) { el.addEventListener('input', apply); });
+        document.getElementById('histReset').addEventListener('click', function () {
+            q.value = ''; from.value = ''; to.value = '';
+            document.querySelector('#histRange [data-range="all"]').click();
+        });
+        apply();
+    })();
+    </script>
+</body>
+</html>

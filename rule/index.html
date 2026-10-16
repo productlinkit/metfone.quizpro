@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizy Flash</title>
+    <link rel="stylesheet" href="../theme/css/bootstrap.min.css?v=red6">
+    <link rel="stylesheet" href="../theme/fontello/css/quizy-flash.css">
+    <link rel="stylesheet" href="../theme/css/style.css?v=red6">
+    <link rel="stylesheet" href="../theme/css/profile.css?v=red6">
+    <link rel="stylesheet" href="../theme/css/pages.css?v=red6">
+    <link rel="stylesheet" href="../theme/floating-copy/css/style.css">
+    <link rel="stylesheet" href="../ext/cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="shortcut icon" type="image/x-icon" href="../theme/images/favicon-quizpro.ico">
+</head>
+<body>
+    <div class="content-wrapper">
+
+        
+    <div class="content-wrapper">
+
+        <div class="page-header">
+            <div class="box-wrapper mx-auto text-center position-relative">
+                <a href="../profile/index.html" class="page-header-back"><span class="qf-icon-back"></span></a>
+                Rules and Policies
+            </div>
+        </div>
+
+        <div class="container box-wrapper">
+            <p class="rules-intro">Tap a section to read the details.</p>
+            <div class="rules-acc" id="rulesAcc">
+                <div class="rules-item">
+                    <button class="rules-head" type="button" data-bs-toggle="collapse" data-bs-target="#rule1" aria-expanded="true" aria-controls="rule1">
+                        <span class="rules-ico fa fa-book"></span>
+                        <span class="rules-title">General Rules</span>
+                        <span class="rules-chev qf-icon-caret"></span>
+                    </button>
+                    <div id="rule1" class="collapse show" data-bs-parent="#rulesAcc">
+                        <ul class="rules-body">
+                            <li>Each user must register an account to participate in quizzes and appear on the leaderboard.</li>
+                            <li>Users are responsible for the accuracy of their account information.</li>
+                            <li>Only one account per user is allowed. Multiple accounts will result in disqualification.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="rules-item">
+                    <button class="rules-head collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#rule2" aria-expanded="false" aria-controls="rule2">
+                        <span class="rules-ico fa fa-gamepad"></span>
+                        <span class="rules-title">Quiz Participation</span>
+                        <span class="rules-chev qf-icon-caret"></span>
+                    </button>
+                    <div id="rule2" class="collapse" data-bs-parent="#rulesAcc">
+                        <ul class="rules-body">
+                            <li>Quizzes are time-bound; ensure submission before the timer ends.</li>
+                            <li>Users must answer all questions without external help or resources unless stated otherwise.</li>
+                            <li>Use of automated tools, bots, or third-party software is strictly prohibited.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="rules-item">
+                    <button class="rules-head collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#rule3" aria-expanded="false" aria-controls="rule3">
+                        <span class="rules-ico fa fa-trophy"></span>
+                        <span class="rules-title">Leaderboard Criteria</span>
+                        <span class="rules-chev qf-icon-caret"></span>
+                    </button>
+                    <div id="rule3" class="collapse" data-bs-parent="#rulesAcc">
+                        <ul class="rules-body">
+                            <li>Scores are calculated based on the number of correct answers and the time taken to complete the quiz.</li>
+                            <li>In case of ties, rankings are determined by the submission time.</li>
+                            <li>Leaderboards are updated in real-time; any discrepancies must be reported within 24 hours.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="rules-item">
+                    <button class="rules-head collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#rule4" aria-expanded="false" aria-controls="rule4">
+                        <span class="rules-ico fa fa-gift"></span>
+                        <span class="rules-title">Rewards and Prizes</span>
+                        <span class="rules-chev qf-icon-caret"></span>
+                    </button>
+                    <div id="rule4" class="collapse" data-bs-parent="#rulesAcc">
+                        <ul class="rules-body">
+                            <li>Prizes, if offered, will be distributed based on the final leaderboard at the end of the quiz period.</li>
+                            <li>Users must verify their identity before claiming prizes.</li>
+                            <li>Prizes are non-transferable and cannot be exchanged for cash.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="rules-item">
+                    <button class="rules-head collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#rule5" aria-expanded="false" aria-controls="rule5">
+                        <span class="rules-ico fa fa-handshake-o"></span>
+                        <span class="rules-title">Fair Play and Conduct</span>
+                        <span class="rules-chev qf-icon-caret"></span>
+                    </button>
+                    <div id="rule5" class="collapse" data-bs-parent="#rulesAcc">
+                        <ul class="rules-body">
+                            <li>Cheating, including sharing answers or collusion, will result in immediate disqualification</li>
+                            <li>Offensive or disruptive behavior in comments or forums associated with the portal is prohibited.</li>
+                            <li>Users found violating policies will be banned from the platform.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="rules-item">
+                    <button class="rules-head collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#rule6" aria-expanded="false" aria-controls="rule6">
+                        <span class="rules-ico fa fa-lock"></span>
+                        <span class="rules-title">Privacy and Data Usage</span>
+                        <span class="rules-chev qf-icon-caret"></span>
+                    </button>
+                    <div id="rule6" class="collapse" data-bs-parent="#rulesAcc">
+                        <ul class="rules-body">
+                            <li>User data collected during registration and participation will be used solely for leaderboard management and prize distribution.</li>
+                            <li>Personal information will not be shared with third parties without consent.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="rules-item">
+                    <button class="rules-head collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#rule7" aria-expanded="false" aria-controls="rule7">
+                        <span class="rules-ico fa fa-balance-scale"></span>
+                        <span class="rules-title">Dispute Resolution</span>
+                        <span class="rules-chev qf-icon-caret"></span>
+                    </button>
+                    <div id="rule7" class="collapse" data-bs-parent="#rulesAcc">
+                        <ul class="rules-body">
+                            <li>Any disputes regarding scores, rankings, or prizes must be submitted within 7 days via the contact form.</li>
+                            <li>The portal administrator’s decision will be final and binding.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="rules-item">
+                    <button class="rules-head collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#rule8" aria-expanded="false" aria-controls="rule8">
+                        <span class="rules-ico fa fa-refresh"></span>
+                        <span class="rules-title">Changes to Rules</span>
+                        <span class="rules-chev qf-icon-caret"></span>
+                    </button>
+                    <div id="rule8" class="collapse" data-bs-parent="#rulesAcc">
+                        <ul class="rules-body">
+                            <li>The portal reserves the right to amend these rules at any time.</li>
+                            <li>Users will be notified of changes via email or portal notifications.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <a href="../contact/index.html" class="rules-help"><span class="fa fa-question-circle"></span> Still have questions? <b>Contact Us</b></a>
+        </div>
+    </div>
+    <!-- Login Model End -->
+
+    
+    <script src="../ext/code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="../theme/js/session.js?v=1"></script>
+    <script src="../theme/js/i18n.js?v=1"></script>
+    <script src="../theme/js/bootstrap.bundle.min.js"></script>
+    <script src="../theme/js/custom.js?v=login2"></script>
+</body>
+</html>

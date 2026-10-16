@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizy Flash</title>
+    <link rel="stylesheet" href="../theme/css/bootstrap.min.css?v=red6">
+    <link rel="stylesheet" href="../theme/fontello/css/quizy-flash.css">
+    <link rel="stylesheet" href="../theme/css/style.css?v=red6">
+    <link rel="stylesheet" href="../theme/css/profile.css?v=red6">
+    <link rel="stylesheet" href="../theme/css/pages.css?v=red6">
+    <link rel="stylesheet" href="../theme/floating-copy/css/style.css">
+    <link rel="stylesheet" href="../ext/cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="shortcut icon" type="image/x-icon" href="../theme/images/favicon-quizpro.ico">
+</head>
+<body>
+    
+    
+    <div class="content-wrapper">
+        <div class="container box-wrapper">
+            <div class="header">
+                <div class="row align-items-center">
+                    <div class="col-6 text-start">
+                        <div class="logo">
+                            <a href="../index.html">
+                                <img src="../theme/images/logo_quizypro.png" alt="Logo">
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-6 text-end">
+                        <a href="#" class="search" id="btnSearch">
+                            <span class="qf-icon-search"></span>
+                        </a>
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+
+
+    <div class="home-profile">
+        <div class="d-flex align-items-center">
+            <a href="../profile/edit/index.html" class="avatar profile-avatar" aria-label="Edit profile photo">
+                <img src="../theme/images/dp.png" data-user-avatar alt="Avatar">
+                <span class="profile-avatar-edit fa fa-camera"></span>
+            </a>
+            <div class="flex-grow-1 ms-3 min-w-0">
+                <a href="../profile/edit/index.html" class="profile-name-edit">
+                    <span class="home-profile-name">Hello</span>
+                    <span class="fa fa-pencil"></span>
+                </a>
+                <div class="home-profile-status">1234567890</div>
+            </div>
+            <span class="badge background-success profile-sub-badge" id="subBadge">Subscriber</span>
+        </div>
+        <div class="profile-sub">
+            <div class="profile-sub-text" id="subText">Daily subscription active · unlimited quizzes &amp; Lucky Draw tickets</div>
+            <button type="button" class="profile-unsub" id="btnUnsub" data-bs-toggle="modal" data-bs-target="#modalUnsub">Unsubscribe</button>
+        </div>
+    </div>
+
+    <div class="card-simple-outer">
+        <ul class="menu">
+            <li class="menu-list">
+                <a href="../game/history/index.html">
+                    <span class="menu-list-ico qf-icon-game"></span>
+                    History
+                </a>
+            </li>
+            <li class="menu-list">
+                <a href="../language/index.html">
+                    <span class="menu-list-ico fa fa-language"></span>
+                    Languages
+                    <span class="menu-lang" id="menuLang"></span>
+                </a>
+            </li>
+
+            <li class="menu-list">
+                <a href="../rule/index.html">
+                    <span class="menu-list-ico qf-icon-attention"></span>
+                    Rules and Policies
+                </a>
+            </li>
+            <li class="menu-list">
+                <a href="../contact/index.html">
+                    <span class="menu-list-ico qf-icon-mail"></span>
+                    Contact Us
+                </a>
+            </li>
+            <li class="menu-list">
+                <a href="../index.html" data-logout>
+                    <span class="menu-list-ico qf-icon-out"></span>
+                    Logout
+                </a>
+            </li>
+        </ul>
+    </div>
+
+
+        </div>
+
+
+        <div class="bottom-spacer" style="height: 65px;"></div>
+<div class="bottom-nav">
+    <div class="bottom-nav-bg row gx-0 box-wrapper mx-auto container-fluid">
+        <div class="col ">
+            <div class="nav-box">
+                <a href="../index.html" class="nav-box-ico">
+                    <span class="qf-icon-home"></span>
+                </a>
+            </div>
+        </div>
+        <div class="col ">
+            <div class="nav-box">
+                <a href="../game/more/index.html" class="nav-box-ico">
+                    <span class="qf-icon-list"></span>
+                </a>
+            </div>
+        </div>
+        <div class="col ">
+            <div class="nav-box">
+                <a href="../lucky-draw/index.html" class="nav-box-ico">
+                    <span class="fa fa-gift"></span>
+                </a>
+            </div>
+        </div>
+        <div class="col ">
+            <div class="nav-box">
+                <a href="../game/leaderboard/index.html" class="nav-box-ico">
+                    <span class="qf-icon-leaderboard"></span>
+                </a>
+            </div>
+        </div>
+        <div class="col active">
+            <div class="nav-box">
+                <a href="../login/index.html" class="nav-box-ico">
+                    <span class="qf-icon-profile"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div> </div>
+
+    <!-- language option model -->
+    <div class="modal fade modal-standard" tabindex="-1" role="dialog" id="modalLang">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background: #E31C23;">
+                    <img src="../theme/images/logo_quizypro.png" width="80" alt="Logo">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <select name="lang" id="lang" style="font-size: 20px;">
+                                            <option value="sdfg">English</option>
+                                            <option value="ar">Arabic</option>
+                                            <option value="fr">French </option>
+                                    </select>
+            </div>
+        </div>
+    </div>
+    <!-- language option model -->
+
+    <div class="modal fade modal-standard" tabindex="-1" id="modalUnsub">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content unsub-modal">
+                <h3 class="modal-level-title mb-2">Unsubscribe?</h3>
+                <p class="unsub-modal-text">You will stop being charged, but you will lose unlimited quizzes and won't earn Lucky Draw tickets anymore.</p>
+                <button type="button" class="btn btn-lg button-primary w-100 mb-2" data-bs-dismiss="modal">Stay Subscribed</button>
+                <button type="button" class="btn btn-lg unsub-confirm w-100" id="btnUnsubConfirm" data-bs-dismiss="modal">Yes, Unsubscribe</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" tabindex="-1" id="search">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content">
+                <div class="modal-body modal-level">
+                    <div class="modal-level-header">
+                        <a href="#" class="modal-level-header-close" data-bs-dismiss="modal" aria-label="Close">
+                            <span class="qf-icon-close"></span>
+                        </a>
+                    </div>
+                    <form action="../search/index.html" id="search-form" method="GET">
+                    <div class="container-fluid box-wrapper">
+                        <h3 class="modal-level-title">Find Quiz</h3>
+                        <div class="input-group input-group-lg shadow">
+                                                        <input type="text" class="form-control main-search" name="q" id="search-box" name="serach_keyword" placeholder="Search..." value="">
+                            <button type="submit" class="btn button-primary"><span class="qf-icon-search"></span></button>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../ext/code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="../theme/js/session.js?v=1"></script>
+    <script src="../theme/js/i18n.js?v=1"></script>
+    <script src="../theme/js/bootstrap.bundle.min.js"></script>
+    <script src="../theme/js/custom.js?v=login2"></script>
+    <script>
+        (function () {
+            var l = QP_I18N.current();
+            document.getElementById('menuLang').innerHTML = '<img src="' + QP_I18N.flagUrl(l) + '" alt="">' + l.native;
+        })();
+    </script>
+    <script>
+        // Demo only: toggle subscription state locally
+        (function () {
+            var KEY = 'qp_demo_unsub', badge = document.getElementById('subBadge'), text = document.getElementById('subText'), btn = document.getElementById('btnUnsub');
+            function isUnsub() { try { return localStorage.getItem(KEY) === '1'; } catch (e) { return false; } }
+            function paint() {
+                var off = isUnsub();
+                badge.textContent = off ? 'Not Subscribed' : 'Subscriber';
+                badge.className = 'badge profile-sub-badge ' + (off ? 'button-grey' : 'background-success');
+                text.textContent = off ? 'Subscribe to play unlimited quizzes and collect Lucky Draw tickets' : 'Daily subscription active · unlimited quizzes & Lucky Draw tickets';
+                btn.textContent = off ? 'Subscribe' : 'Unsubscribe';
+                btn.classList.toggle('is-subscribe', off);
+                if (off) { btn.removeAttribute('data-bs-toggle'); } else { btn.setAttribute('data-bs-toggle', 'modal'); }
+            }
+            btn.addEventListener('click', function () { if (isUnsub()) { try { localStorage.removeItem(KEY); } catch (e) {} paint(); } });
+            document.getElementById('btnUnsubConfirm').addEventListener('click', function () { try { localStorage.setItem(KEY, '1'); } catch (e) {} paint(); });
+            paint();
+        })();
+    </script>
+</body>
+</html>

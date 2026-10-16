@@ -2,7 +2,8 @@ var baseURL = window.location.origin;
 
 $(document).ready(function () {
 
-	$('#btnSearch').click(function() {
+	$('#btnSearch').click(function(e) {
+        e.preventDefault();
         $('#search').modal('show')
     });
 
