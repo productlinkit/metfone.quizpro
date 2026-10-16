@@ -3,15 +3,20 @@
  * Everything marked confirmed:false is NOT an agreed business rule yet.
  * Change values here; both the user page and the admin page read this file.
  */
+// Images live next to this file (lucky-draw/img/), whichever page loads it
+var LD_BASE = (document.currentScript ? document.currentScript.src.replace(/[^\/?#]*([?#].*)?$/, '') : '');
+
 window.LD_CONFIG = {
   campaign: {
     name: 'QuizPro Lucky Draw',
     periodStart: '2026-10-01',
     periodEnd: '2026-10-31',
     drawDate: '2026-11-03T15:00:00',
+    // Prize items are placeholders until the business confirms them
     prizes: [
-      { rank: 'Grand Prize', item: 'Prize to be confirmed', qty: 1 },
-      { rank: 'Runner-up', item: 'Prize to be confirmed', qty: 3 }
+      { rank: 'Grand Prize', item: 'Smartphone', icon: 'phone', img: LD_BASE + 'img/prize-phone.jpg', qty: 1 },
+      { rank: '2nd Prize', item: 'Wireless Earbuds', icon: 'earbuds', img: LD_BASE + 'img/prize-earbuds.jpg', qty: 2 },
+      { rank: '3rd Prize', item: 'Metfone Credit', icon: 'credit', qty: 5 }
     ],
     confirmed: false
   },
@@ -22,7 +27,7 @@ window.LD_CONFIG = {
 
   // 'weighted' = each ticket is one entry (more tickets, more chances)
   // 'one-per-user' = every eligible user gets one entry regardless of ticket count
-  drawMethod: { type: 'weighted', winners: 4, backups: 2, confirmed: false },
+  drawMethod: { type: 'weighted', winners: 8, backups: 2, confirmed: false },
 
   // Proposed eligibility checks (admin side). confirmed:false = proposal from wireframe.
   eligibility: [
@@ -38,6 +43,9 @@ window.LD_CONFIG = {
   sectionStatus: {
     entry: 'tbc',
     hero: 'tbc',
+    period: 'new',
+    drawing: 'new',
+    prizes: 'new',
     myTickets: 'tbc',
     howToEarn: 'new',
     history: 'new',
@@ -49,6 +57,13 @@ window.LD_CONFIG = {
     adminAudit: 'new'
   }
 };
+
+// Previous periods for the Ticket Tracker "History" tab (sample data)
+window.LD_PAST_PERIODS = [
+  { name: 'September 2026', start: '2026-09-01', end: '2026-09-30', draw: '2026-10-03', tickets: 14, result: 'Not won' },
+  { name: 'August 2026', start: '2026-08-01', end: '2026-08-31', draw: '2026-09-03', tickets: 6, result: 'Won · Metfone Credit' },
+  { name: 'July 2026', start: '2026-07-01', end: '2026-07-31', draw: '2026-08-03', tickets: 3, result: 'Not won' }
+];
 
 // Demo activity for the logged-in sample user (answered + correct stored so either basis works)
 window.LD_DEMO_ACTIVITY = [
@@ -73,10 +88,19 @@ window.LD = {
   basisLabel: function (rule) {
     return rule.basis === 'correct' ? 'correct answers' : 'questions answered';
   },
-  fmtDate: function (s, withTime) {
+  fmtDate: function (s, withTime, noYear) {
     var d = new Date(s.replace(' ', 'T'));
+    if (window.QP_I18N) return QP_I18N.date(d, { time: withTime, noYear: noYear });
     var o = { day: 'numeric', month: 'short', year: 'numeric' };
     if (withTime) { o.hour = '2-digit'; o.minute = '2-digit'; }
     return d.toLocaleString('en-GB', o);
   }
 };
+
+// Quizzes played in this demo copy (saved by demo-backend.js) come first in Ticket History
+(function () {
+  try {
+    var played = JSON.parse(localStorage.getItem('qp_ld_activity')) || [];
+    window.LD_DEMO_ACTIVITY = played.concat(window.LD_DEMO_ACTIVITY);
+  } catch (e) {}
+})();

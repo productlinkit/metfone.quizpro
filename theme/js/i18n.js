@@ -279,7 +279,7 @@
         '3rd Prize': ['រង្វាន់លេខ ៣', '三等奖'],
         'Smartphone': ['ស្មាតហ្វូន', '智能手机'],
         'Wireless Earbuds': ['កាសឥតខ្សែ', '无线耳机'],
-        'Cellcard Credit': ['លុយ Cellcard', 'Cellcard 话费'],
+        'Metfone Credit': ['លុយ Metfone', 'Metfone 话费'],
         'My Ticket Tracker': ['តាមដានសំបុត្ររបស់ខ្ញុំ', '我的奖券记录'],
         'Your tickets and where they came from': ['សំបុត្ររបស់អ្នក និងប្រភពដែលទទួលបាន', '你的奖券及其来源'],
         'Current Period': ['វគ្គបច្ចុប្បន្ន', '本期'],

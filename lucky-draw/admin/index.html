@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lucky Draw Admin</title>
-    <link rel="stylesheet" href="../../theme/css/bootstrap.min.css?v=red6">
+    <link rel="stylesheet" href="../../theme/css/bootstrap.min.css?v=red14">
     <link rel="stylesheet" href="../../theme/fontello/css/quizy-flash.css">
-    <link rel="stylesheet" href="../../theme/css/style.css?v=red6">
+    <link rel="stylesheet" href="../../theme/css/style.css?v=red14">
     <link rel="stylesheet" href="../../ext/cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../ld.css?v=red6">
+    <link rel="stylesheet" href="../ld.css?v=red14">
     <link rel="shortcut icon" type="image/x-icon" href="../../theme/images/favicon-quizpro.ico">
     <style>
         body{background:#F4F7FB}
@@ -16,8 +16,8 @@
         .adm-top{background:#E31C23;color:#fff;padding:14px 0}
         .adm-top img{height:28px}
         .adm-wrap{max-width:1100px}
-        .adm-card{background:#fff;border-radius:16px;padding:20px;margin-bottom:20px;box-shadow:0 2px 6px rgba(12,9,42,.05)}
-        .adm-card h2{font-size:1.0625rem;font-weight:bold;margin-bottom:4px;color:#0C092A}
+        .adm-card{background:#fff;border-radius:16px;padding:20px;margin-bottom:20px;box-shadow:0 2px 6px rgba(0,0,0,.05)}
+        .adm-card h2{font-size:1.0625rem;font-weight:bold;margin-bottom:4px;color:#2F2F2F}
         .adm-card .sub{color:#969696;font-size:.875rem;margin-bottom:16px}
         .adm-label{font-size:.75rem;font-weight:bold;color:#969696;text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px;display:block}
         .adm-card .form-control,.adm-card .form-select{font-size:.875rem;border-radius:8px}
@@ -35,10 +35,10 @@
         .steps li::before{content:counter(s);position:absolute;left:0;top:0;width:26px;height:26px;border-radius:50%;background:#DFDFDF;color:#fff;font-weight:bold;font-size:.75rem;display:flex;align-items:center;justify-content:center}
         .steps li.done::before{background:#47c475;content:'\2713'}
         .steps li.current::before{background:#E31C23}
-        .steps li b{display:block;color:#0C092A}
+        .steps li b{display:block;color:#2F2F2F}
         .steps li span{color:#969696}
         .stat{background:#F4F7FB;border-radius:12px;padding:12px;text-align:center}
-        .stat b{display:block;font-size:1.375rem;color:#0C092A}
+        .stat b{display:block;font-size:1.375rem;color:#2F2F2F}
         .stat span{font-size:.75rem;color:#969696}
         .mono{font-family:ui-monospace,Menlo,monospace;font-size:.75rem}
         .rule-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee;font-size:.875rem}
@@ -151,7 +151,7 @@
         </div></div>
     </div>
 
-    <script src="../ld-config.js"></script>
+    <script src="../ld-config.js?v=2"></script>
     <script>
     (function () {
         var C = LD_CONFIG, $ = function (id) { return document.getElementById(id); };

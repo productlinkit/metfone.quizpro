@@ -6,7 +6,8 @@
 (function () {
     var KEY = 'qp_user';
     var DEFAULT_AVATAR = 'theme/images/dp.png';
-    var MEMBER_PAGES = ['profile/index.html', 'profile/edit/index.html', 'game/history/index.html'];
+    var MEMBER_PAGES = ['profile/index.html', 'profile/edit/index.html', 'game/history/index.html',
+        'game/match/index.html', 'game/play/index.html', 'game/result/index.html'];
 
     // Site root, worked out from this script's own URL (…/theme/js/session.js)
     var script = document.currentScript;

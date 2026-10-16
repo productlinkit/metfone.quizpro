@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizy Flash</title>
+    <link rel="stylesheet" href="../../theme/css/bootstrap.min.css?v=red14">
+    <link rel="stylesheet" href="../../theme/fontello/css/quizy-flash.css">
+    <link rel="stylesheet" href="../../theme/css/style.css?v=red14">
+    <link rel="stylesheet" href="../../ext/cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../lucky-draw/ld.css?v=red14">
+    <link rel="stylesheet" href="../../theme/css/game.css?v=red14">
+    <link rel="shortcut icon" type="image/x-icon" href="../../theme/images/favicon-quizpro.ico">
+</head>
+<body class="result-page">
+
+    <div class="res-confetti" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
+    <div class="content-wrapper">
+        <div class="container box-wrapper text-center res-wrap">
+
+            <!-- Hero -->
+            <div class="res-hero">
+                <div class="res-rays" aria-hidden="true"></div>
+                <div class="res-ava-wrap">
+                    <span class="res-crown" aria-hidden="true"><span class="qf-icon-crown"></span></span>
+                    <span class="res-ava"><img src="../../theme/images/dp.png" data-user-avatar alt="You"></span>
+                    <span class="res-badge" id="r-badge"><span class="fa fa-trophy"></span></span>
+                </div>
+                <div class="res-ribbon"><span id="r-status">You Win!</span></div>
+                <p class="res-ann" id="r-ann">Great job, keep it up</p>
+                <span class="res-points"><span class="res-points-ico"><span class="qf-icon-crown"></span></span><span>+<span id="r-points">0</span> Points</span></span>
+            </div>
+
+            <!-- Score -->
+            <div class="res-card res-score">
+                <div class="res-card-title">Final Score</div>
+                <div class="res-vs">
+                    <div class="res-side me">
+                        <span class="res-winner">WINNER</span>
+                        <span class="res-side-ava"><img src="../../theme/images/dp.png" data-user-avatar alt=""></span>
+                        <span class="res-side-name">You</span>
+                        <span class="res-side-score" id="r-real">0</span>
+                    </div>
+                    <span class="res-vs-badge">VS</span>
+                    <div class="res-side opp">
+                        <span class="res-winner">WINNER</span>
+                        <span class="res-side-ava" id="r-opp-ava"></span>
+                        <span class="res-side-name" id="r-opp-name">Eissa</span>
+                        <span class="res-side-score" id="r-fake">0</span>
+                    </div>
+                </div>
+                <div class="res-bar" aria-hidden="true"><span class="res-bar-me" id="r-bar-me"></span><span class="res-bar-opp" id="r-bar-opp"></span></div>
+            </div>
+
+            <!-- Stats -->
+            <div class="res-stats">
+                <div class="res-stat"><span class="res-stat-ico green"><span class="fa fa-check"></span></span><b id="r-correct">0</b><small>Correct answers</small></div>
+                <div class="res-stat"><span class="res-stat-ico blue"><span class="fa fa-bullseye"></span></span><b id="r-acc">0%</b><small>Accuracy</small></div>
+                <div class="res-stat"><span class="res-stat-ico orange"><span class="fa fa-signal"></span></span><b id="r-level">-</b><small>Level</small></div>
+            </div>
+            <div class="res-answered"><span id="r-answered">0/10</span> <span>Questions answered</span></div>
+
+            <a href="../../lucky-draw/index.html" class="ld-entry text-start" id="r-ld">
+                <span class="ld-entry-ico"><img class="ld-ill" src="../../lucky-draw/img/ticket.png" alt=""></span>
+                <span>
+                    <span class="ld-entry-title d-block" id="r-ld-title">+0 Lucky Draw tickets</span>
+                    <span class="ld-entry-sub d-block">See your Ticket History</span>
+                </span>
+                <span class="ld-entry-go qf-icon-arrow-right"></span>
+            </a>
+
+            <div class="res-actions">
+                <a href="#" class="btn btn-lg button-primary res-btn" id="r-again"><span class="qf-icon-replay"></span> Play Again</a>
+                <a href="../../index.html" class="btn btn-lg res-btn res-btn-ghost"><span class="qf-icon-home"></span> Home</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../ext/code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="../../theme/js/session.js?v=2"></script>
+    <script src="../../theme/js/game-demo.js?v=4"></script>
+    <script src="../../theme/js/i18n.js?v=2"></script>
+    <script src="../../theme/js/bootstrap.bundle.min.js"></script>
+    <script src="../../lucky-draw/ld-config.js?v=2"></script>
+    <script>
+    (function () {
+        var p = new URLSearchParams(location.search);
+        var level = QP_DEMO.LEVELS.filter(function (l) { return String(l.id) === p.get('level'); })[0] || QP_DEMO.LEVELS[0];
+        var answered = +p.get('answered') || 0, correct = +p.get('correct') || 0;
+        var real = +p.get('real') || 0, fake = +p.get('fake') || 0;
+        var opp = QP_DEMO.opponent(), total = +p.get('total') || 10;
+        document.getElementById('r-opp-name').textContent = opp.name;
+        document.getElementById('r-opp-ava').innerHTML = QP_DEMO.avatarHtml(opp);
+        document.getElementById('r-correct').textContent = correct + '/' + total;
+        document.getElementById('r-acc').textContent = (answered ? Math.round(correct / answered * 100) : 0) + '%';
+        document.getElementById('r-answered').textContent = answered + '/' + total;
+        document.getElementById('r-level').textContent = level.title;
+        document.getElementById('r-again').href = QP_DEMO.ROOT + 'game/detail/' + (p.get('game') || 31) + '/index.html';
+
+        // Broken heart for the lose badge (Font Awesome 4.7 has none)
+        var BROKEN_HEART = '<svg class="res-badge-svg" viewBox="0 0 24 24" aria-hidden="true">' +
+            '<path d="M11.2 5.2C9.9 3.9 8.3 3.2 6.6 3.2 3.5 3.2 1.2 5.6 1.2 8.7c0 4.1 3.8 7.4 9.6 12.4l.5.4 1.3-3.9-2.3-2.6 2.6-3.4-1.8-3z"/>' +
+            '<path d="M13.2 5.1c1.3-1.2 2.8-1.9 4.3-1.9 3.1 0 5.5 2.4 5.5 5.5 0 4.1-3.8 7.4-9.6 12.4l-.4.3 1.1-3.6-2.2-2.5 2.6-3.4-1.8-3.2z"/>' +
+            '</svg>';
+
+        function show(win) {
+            // Preview keeps the scores consistent with the chosen outcome
+            var hi = Math.max(real, fake), lo = Math.min(real, fake);
+            if (hi === lo) { hi = real || level.points; lo = Math.max(hi - level.points, 0); }
+            var me = win ? hi : lo, them = win ? lo : hi;
+            if (win === (p.get('res') === 'win')) { me = real; them = fake; }
+            document.body.classList.toggle('is-win', win);
+            document.body.classList.toggle('is-lose', !win);
+            document.getElementById('r-status').textContent = win ? 'You Win!' : 'You Lose';
+            document.getElementById('r-ann').textContent = win ? 'Great job, keep it up' : 'Nice try, play again to win';
+            document.getElementById('r-badge').innerHTML = win ? '<span class="fa fa-trophy"></span>' : BROKEN_HEART;
+            document.getElementById('r-points').textContent = me;
+            document.getElementById('r-real').textContent = me;
+            document.getElementById('r-fake').textContent = them;
+            var sum = me + them || 1;
+            document.getElementById('r-bar-me').style.width = (me / sum * 100) + '%';
+            document.getElementById('r-bar-opp').style.width = (them / sum * 100) + '%';
+            // replay entrance animation when switching preview
+            var w = document.querySelector('.res-wrap'); w.classList.remove('enter'); void w.offsetWidth; w.classList.add('enter');
+            document.querySelectorAll('.result-preview button').forEach(function (b) {
+                b.classList.toggle('active', (b.getAttribute('data-res') === 'win') === win);
+            });
+        }
+        document.querySelectorAll('.result-preview button').forEach(function (b) {
+            b.addEventListener('click', function () { show(b.getAttribute('data-res') === 'win'); });
+        });
+        show(p.get('res') === 'win');
+        var t = LD.ticketsFor({ answered: answered, correct: correct }, LD_CONFIG.ticketRule);
+        document.getElementById('r-ld-title').textContent = '+' + t + ' Lucky Draw ticket' + (t === 1 ? '' : 's');
+    })();
+    </script>
+</body>
+</html>
