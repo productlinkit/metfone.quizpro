@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizy Flash</title>
+    <link rel="stylesheet" href="../theme/css/bootstrap.min.css?v=red2">
+    <link rel="stylesheet" href="../theme/fontello/css/quizy-flash.css">
+    <link rel="stylesheet" href="../theme/css/style.css?v=red2">
+    <link rel="stylesheet" href="../ext/cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="ld.css?v=red2">
+    <link rel="shortcut icon" type="image/x-icon" href="../theme/images/favicon-quizpro.ico">
+</head>
+<body>
+    <div class="content-wrapper">
+        <div class="page-header">
+            <div class="box-wrapper mx-auto text-center position-relative">
+                <a href="../index.html" class="page-header-back"><span class="qf-icon-back"></span></a>
+                Lucky Draw
+            </div>
+        </div>
+
+        <div class="container box-wrapper" id="ld-root"></div>
+
+        <div class="bottom-spacer" style="height: 65px;"></div>
+        <div class="bottom-nav">
+            <div class="bottom-nav-bg row gx-0 box-wrapper mx-auto container-fluid">
+                <div class="col"><div class="nav-box"><a href="../index.html" class="nav-box-ico"><span class="qf-icon-home"></span></a></div></div>
+                <div class="col"><div class="nav-box"><a href="../game/more/index.html" class="nav-box-ico"><span class="qf-icon-list"></span></a></div></div>
+                <div class="col active"><div class="nav-box"><a href="index.html" class="nav-box-ico"><span class="fa fa-gift"></span></a></div></div>
+                <div class="col"><div class="nav-box"><a href="../game/leaderboard/index.html" class="nav-box-ico"><span class="qf-icon-leaderboard"></span></a></div></div>
+                <div class="col"><div class="nav-box"><a href="../login/index.html" class="nav-box-ico"><span class="qf-icon-profile"></span></a></div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Prototype review panel (not part of the product UI) -->
+    <button class="ld-review-btn" id="ld-review-btn"><span class="fa fa-sliders"></span> Review</button>
+    <div class="ld-panel" id="ld-panel">
+        <button class="ld-panel-close" id="ld-panel-close" aria-label="Close"><span class="qf-icon-close"></span></button>
+        <h6>Screen state</h6>
+        <div class="ld-chips" id="ld-states"></div>
+        <h6>Ticket rule preview <span class="ld-flag" style="display:inline">not confirmed</span></h6>
+        <div>
+            <input type="number" id="ld-r-tickets" min="1"> ticket(s) for every
+            <input type="number" id="ld-r-every" min="1">
+            <select id="ld-r-basis">
+                <option value="answered">questions answered</option>
+                <option value="correct">correct answers</option>
+            </select>
+        </div>
+        <h6>Draw method <span class="ld-flag" style="display:inline">not confirmed</span></h6>
+        <select id="ld-method">
+            <option value="weighted">Weighted – 1 ticket = 1 entry</option>
+            <option value="one-per-user">One entry per eligible user</option>
+        </select>
+        <h6>Annotations</h6>
+        <label><input type="checkbox" id="ld-notes-toggle"> Show section status &amp; open questions</label>
+        <div class="ld-legend mt-2">
+            <span><span class="ld-note new" style="display:inline-flex">New</span></span>
+            <span><span class="ld-note existing" style="display:inline-flex">Existing – reuse with adjustment</span></span>
+            <span><span class="ld-note tbc" style="display:inline-flex">Existing or new? – to confirm</span></span>
+        </div>
+        <p class="ld-muted mt-3 mb-0">Admin view: <a href="admin/index.html" style="color:#DB1A21;font-weight:bold">Lucky Draw admin</a></p>
+    </div>
+
+    <script src="../ext/code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="../theme/js/bootstrap.bundle.min.js"></script>
+    <script src="ld-config.js"></script>
+    <script>
+    (function () {
+        var C = LD_CONFIG, A = LD_DEMO_ACTIVITY, $root = document.getElementById('ld-root');
+        var STATES = [
+            ['guest', 'Guest (not logged in)'],
+            ['upcoming', 'Not started'],
+            ['active', 'Active'],
+            ['active-empty', 'Active – 0 tickets'],
+            ['completed-win', 'Draw completed – winner'],
+            ['completed-lose', 'Draw completed – not won']
+        ];
+        var params = new URLSearchParams(location.search);
+        var state = params.get('state') || 'active';
+        var notes = params.get('notes') === '1';
+
+        function note(key) {
+            var s = C.sectionStatus[key];
+            return s ? '<div><span class="ld-note ' + s + '">' + LD.status[s] + '</span></div>' : '';
+        }
+        function flag(text) { return '<span class="ld-flag">' + text + '</span>'; }
+        function iconImg(id) { return '../images/category/' + id + '/icon/' + id + '_01122022_icon_image.png'; }
+        function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+
+        function ruleText() {
+            var r = C.ticketRule;
+            return '<b>' + r.tickets + ' ticket' + (r.tickets > 1 ? 's' : '') + '</b> for every <b>' + r.every + ' ' + LD.basisLabel(r) + '</b>';
+        }
+
+        function hero() {
+            var c = C.campaign, done = state.indexOf('completed') === 0, up = state === 'upcoming';
+            var badge = done ? 'Draw completed' : up ? 'Coming soon' : 'Campaign is live';
+            var prize = c.prizes.map(function (p) { return p.qty + '× ' + esc(p.rank); }).join(' · ');
+            var cd = done ? '' :
+                '<div class="ld-countdown" id="ld-countdown"></div>';
+            return '<div class="ld-annot">' + note('hero') +
+                '<div class="ld-hero">' +
+                    '<div class="ld-hero-badge">' + badge + '</div><br>' +
+                    '<div class="ld-hero-gift"><span class="fa fa-gift"></span></div>' +
+                    '<div class="ld-hero-title">' + esc(c.name) + '</div>' +
+                    '<div class="ld-hero-prize">' + prize + flag('prizes TBC') + '</div>' +
+                    cd +
+                    '<div class="ld-dates">' +
+                        '<div class="ld-dates-row"><span class="quiz-info-meta-circle points"><span class="fa fa-calendar"></span></span>' +
+                            '<div><div class="ld-dates-label">Campaign Period</div><div class="ld-dates-value">' + LD.fmtDate(c.periodStart) + ' – ' + LD.fmtDate(c.periodEnd) + flag('dates TBC') + '</div></div></div>' +
+                        '<div class="ld-dates-row"><span class="quiz-info-meta-circle"><span class="fa fa-trophy"></span></span>' +
+                            '<div><div class="ld-dates-label">Draw Date</div><div class="ld-dates-value">' + LD.fmtDate(c.drawDate, true) + '</div></div></div>' +
+                    '</div>' +
+                '</div></div>';
+        }
+
+        function countdownTarget() {
+            return new Date(state === 'upcoming' ? C.campaign.periodStart + 'T00:00:00' : C.campaign.drawDate);
+        }
+        function tickCountdown() {
+            var el = document.getElementById('ld-countdown');
+            if (!el) return;
+            // Prototype: count from a fixed "today" inside the campaign so the demo always shows time left
+            var now = state === 'upcoming' ? new Date('2026-09-27T09:00:00') : new Date('2026-10-15T09:00:00');
+            now = new Date(now.getTime() + (Date.now() - loadedAt));
+            var ms = Math.max(0, countdownTarget() - now), s = Math.floor(ms / 1000);
+            var parts = [[Math.floor(s / 86400), 'days'], [Math.floor(s % 86400 / 3600), 'hrs'], [Math.floor(s % 3600 / 60), 'min'], [s % 60, 'sec']];
+            el.innerHTML = '<div style="flex-basis:100%;background:none;color:#fff;font-size:.8125rem;padding:0">' + (state === 'upcoming' ? 'Starts in' : 'Draw in') + '</div>' +
+                parts.map(function (p) { return '<div><b>' + String(p[0]).padStart(2, '0') + '</b><span>' + p[1] + '</span></div>'; }).join('');
+            el.style.flexWrap = 'wrap';
+        }
+
+        function activity() { return state === 'active-empty' || state === 'upcoming' ? [] : A; }
+        function totalTickets() { return activity().reduce(function (t, a) { return t + LD.ticketsFor(a, C.ticketRule); }, 0); }
+
+        function myTickets() {
+            var t = totalTickets(), done = state.indexOf('completed') === 0;
+            var sub = state === 'upcoming' ? 'Tickets can be earned once the campaign starts.'
+                : done ? 'Your tickets were entered in this draw.'
+                : t === 0 ? 'You have no tickets yet. Play a quiz to get your first one.'
+                : C.drawMethod.type === 'weighted' ? 'Each ticket is one entry. More tickets, more chances to win.'
+                : 'Any ticket makes you eligible. Every eligible player gets one entry.';
+            var methodFlag = C.drawMethod.type === 'weighted' ? flag('draw method TBC') : flag('draw method TBC');
+            return '<div class="ld-annot">' + note('myTickets') +
+                '<div class="card-simple">' +
+                    '<h3 class="section-title mb-3">My Tickets</h3>' +
+                    '<div class="ld-tickets">' +
+                        '<div class="ld-ticket-shape">' + t + '<small>ticket' + (t === 1 ? '' : 's') + '</small></div>' +
+                        '<div class="ld-muted">' + sub + (t > 0 && !done ? methodFlag : '') + '</div>' +
+                    '</div>' +
+                    (done || state === 'upcoming' ? '' : '<a href="../game/more/index.html" class="btn btn-lg button-primary w-100">Play to Earn Tickets</a>') +
+                '</div></div>';
+        }
+
+        function howToEarn() {
+            var r = C.ticketRule;
+            return '<div class="ld-annot">' + note('howToEarn') +
+                '<div class="card-simple">' +
+                    '<h3 class="section-title mb-3">How to Earn Tickets</h3>' +
+                    '<ol class="ld-steps">' +
+                        '<li><span class="ld-step-num">1</span><div><div class="ld-step-title">Play any quiz</div><div class="ld-muted">Every quiz you play during the campaign period counts.</div></div></li>' +
+                        '<li><span class="ld-step-num">2</span><div><div class="ld-step-title">Collect tickets</div><div class="ld-muted">Tickets are added automatically after each quiz. Check Ticket History to see where each ticket came from.</div></div></li>' +
+                        '<li><span class="ld-step-num">3</span><div><div class="ld-step-title">Wait for the draw</div><div class="ld-muted">Winners are drawn on ' + LD.fmtDate(C.campaign.drawDate) + ' and announced on this page.</div></div></li>' +
+                    '</ol>' +
+                    '<div class="ld-rule"><span class="fa fa-ticket"></span> You get ' + ruleText() + '.' +
+                        (r.dailyCap ? ' Max ' + r.dailyCap + ' tickets per day.' : '') +
+                        flag('rule & basis not confirmed') + '</div>' +
+                '</div></div>';
+        }
+
+        function history() {
+            var rows = activity(), r = C.ticketRule, total = totalTickets();
+            var body = rows.length ? rows.map(function (a) {
+                var n = LD.ticketsFor(a, r);
+                return '<li class="history-list"><div class="d-flex w-100">' +
+                    '<div class="history-list-pict"><img src="' + iconImg(a.icon) + '" alt=""></div>' +
+                    '<div class="history-list-info">' +
+                        '<h4 class="history-list-info-name">' + esc(a.quiz) + ' quiz</h4>' +
+                        '<div class="history-list-info-stats">' +
+                            '<span' + (r.basis === 'answered' ? ' style="color:#0C092A;font-weight:bold"' : '') + '>' + a.answered + ' answered</span> · ' +
+                            '<span' + (r.basis === 'correct' ? ' style="color:#0C092A;font-weight:bold"' : '') + '>' + a.correct + ' correct</span></div>' +
+                        '<div class="history-list-date">' + LD.fmtDate(a.date, true) + '</div>' +
+                    '</div>' +
+                    '<span class="ld-plus' + (n ? '' : ' zero') + '">+' + n + ' <span class="fa fa-ticket"></span></span>' +
+                '</div></li>';
+            }).join('') : '<li class="ld-empty"><span class="fa fa-ticket"></span>No tickets yet.<br>Tickets you earn will appear here.</li>';
+            return '<div class="ld-annot">' + note('history') +
+                '<div class="card-simple-outer">' +
+                    '<h3 class="section-title" style="padding:24px 1rem 0.5rem">Ticket History</h3>' +
+                    '<ul class="history ld-history">' + body + '</ul>' +
+                    (rows.length ? '<div class="ld-history-total"><span>Total tickets</span><span>' + total + '</span></div>' : '') +
+                '</div></div>';
+        }
+
+        function winners() {
+            var win = state === 'completed-win', t = totalTickets();
+            var list = [
+                ['09•••••4821', C.campaign.prizes[0].rank, '../uploads/user/1/ava-eissa.png'],
+                ['09•••••1176', C.campaign.prizes[1].rank, '../theme/images/dp.png'],
+                [win ? 'You (09•••••3390)' : '09•••••7302', C.campaign.prizes[1].rank, '../uploads/user/2/91819a12c87646f315a23b80fbf283ea.jpg'],
+                ['09•••••5518', C.campaign.prizes[1].rank, '../theme/images/dp.png']
+            ];
+            var result = win
+                ? '<div class="ld-result win"><span class="fa fa-trophy"></span><div class="ld-result-title">Congratulations, you won!</div><div>' + esc(C.campaign.prizes[1].rank) + ' – our team will contact you by SMS within 7 days.' + flag('claim process TBC') + '</div></div>'
+                : '<div class="ld-result lose"><span class="fa fa-heart"></span><div class="ld-result-title">Not this time</div><div class="ld-muted">Your ' + t + ' ticket' + (t === 1 ? ' was' : 's were') + ' entered in the draw. Keep playing for the next Lucky Draw!</div></div>';
+            return '<div class="ld-annot">' + note('winners') + result +
+                '<div class="card-simple-outer">' +
+                    '<div style="padding:24px 1rem 0.5rem"><h3 class="section-title">Winner Announcement</h3>' +
+                    '<div class="ld-muted">Drawn on ' + LD.fmtDate(C.campaign.drawDate, true) + '</div></div>' +
+                    '<ul class="leaderboard">' + list.map(function (w, i) {
+                        return '<li class="leaderboard-winner"><div class="d-flex align-items-center w-100">' +
+                            '<div class="leaderboard-winner-pict"><img src="' + w[2] + '" alt=""><span class="leaderboard-winner-rank ld-winner-rank">' + (i + 1) + '</span></div>' +
+                            '<div class="leaderboard-winner-info"><h4 class="leaderboard-winner-info-name">' + w[0] + '</h4></div>' +
+                            '<span class="ld-winner-prize">' + esc(w[1]) + '</span></div></li>';
+                    }).join('') + '</ul>' +
+                '</div></div>';
+        }
+
+        function guestCta() {
+            return '<div class="card-simple text-center">' +
+                '<h3 class="section-title mb-2">Join the Lucky Draw</h3>' +
+                '<p class="ld-muted">Log in to start collecting tickets and see your Ticket History.</p>' +
+                '<a href="../login/index.html" class="btn btn-lg button-green w-100">Login</a></div>';
+        }
+
+        function terms() {
+            return '<div class="ld-annot">' + note('terms') +
+                '<details class="card-simple ld-terms"><summary>Terms &amp; Conditions</summary><ol>' +
+                    '<li>Open to active QuizPro subscribers during the campaign period.' + flag('eligibility TBC') + '</li>' +
+                    '<li>Tickets are earned from quizzes played between ' + LD.fmtDate(C.campaign.periodStart) + ' and ' + LD.fmtDate(C.campaign.periodEnd) + '.</li>' +
+                    '<li>Winners are selected at random from eligible entries on the draw date.</li>' +
+                    '<li>Each mobile number can win at most one prize per campaign.' + flag('TBC') + '</li>' +
+                    '<li>Tickets are not transferable and cannot be exchanged for cash.</li>' +
+                '</ol></details></div>';
+        }
+
+        function render() {
+            document.body.classList.toggle('ld-notes', notes);
+            var html = hero();
+            if (state === 'guest') html += howToEarn() + guestCta();
+            else if (state.indexOf('completed') === 0) html += winners() + myTickets() + history();
+            else html += myTickets() + howToEarn() + history();
+            html += terms();
+            $root.innerHTML = html;
+            tickCountdown();
+            renderPanel();
+            var u = new URL(location.href);
+            u.searchParams.set('state', state);
+            notes ? u.searchParams.set('notes', '1') : u.searchParams.delete('notes');
+            history_replace(u);
+        }
+        function history_replace(u) { try { window.history.replaceState(null, '', u); } catch (e) {} }
+
+        function renderPanel() {
+            document.getElementById('ld-states').innerHTML = STATES.map(function (s) {
+                return '<button class="ld-chip' + (s[0] === state ? ' on' : '') + '" data-state="' + s[0] + '">' + s[1] + '</button>';
+            }).join('');
+            document.getElementById('ld-r-tickets').value = C.ticketRule.tickets;
+            document.getElementById('ld-r-every').value = C.ticketRule.every;
+            document.getElementById('ld-r-basis').value = C.ticketRule.basis;
+            document.getElementById('ld-method').value = C.drawMethod.type;
+            document.getElementById('ld-notes-toggle').checked = notes;
+        }
+
+        var loadedAt = Date.now();
+        document.getElementById('ld-states').addEventListener('click', function (e) {
+            var b = e.target.closest('[data-state]'); if (!b) return;
+            state = b.getAttribute('data-state'); render();
+        });
+        function num(id, d) { var v = parseInt(document.getElementById(id).value, 10); return v > 0 ? v : d; }
+        ['ld-r-tickets', 'ld-r-every', 'ld-r-basis', 'ld-method', 'ld-notes-toggle'].forEach(function (id) {
+            document.getElementById(id).addEventListener('change', function () {
+                C.ticketRule.tickets = num('ld-r-tickets', 1);
+                C.ticketRule.every = num('ld-r-every', 1);
+                C.ticketRule.basis = document.getElementById('ld-r-basis').value;
+                C.drawMethod.type = document.getElementById('ld-method').value;
+                notes = document.getElementById('ld-notes-toggle').checked;
+                render();
+            });
+        });
+        var panel = document.getElementById('ld-panel');
+        document.getElementById('ld-review-btn').onclick = function () { panel.classList.add('open'); };
+        document.getElementById('ld-panel-close').onclick = function () { panel.classList.remove('open'); };
+
+        render();
+        setInterval(tickCountdown, 1000);
+    })();
+    </script>
+</body>
+</html>

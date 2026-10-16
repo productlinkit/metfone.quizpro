@@ -1,0 +1,103 @@
+/* Lucky Draw – built on the QuizPro theme (theme/css/style.css) */
+
+/* 5-item bottom nav */
+.bottom-nav .col{min-width:20%}
+.nav-box-ico .fa{font-size:1.5rem;line-height:1}
+
+/* Home entry banner */
+.ld-entry{display:flex;align-items:center;gap:12px;background:linear-gradient(135deg,#DB1A21 0%,#A51419 100%);color:#fff;border-radius:24px;padding:1rem;margin-bottom:24px;text-decoration:none;position:relative;box-shadow:0 5px 10px rgba(12,9,42,0.1)}
+.ld-entry:hover,.ld-entry:focus{color:#fff;filter:brightness(1.03)}
+.ld-entry-ico{width:52px;height:52px;border-radius:50%;background:#fff;color:#DB1A21;display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0}
+.ld-entry-title{font-weight:bold;font-size:1.0625rem;line-height:1.2}
+.ld-entry-sub{font-size:0.8125rem;opacity:.95}
+.ld-entry-go{margin-left:auto;font-size:1.1rem}
+
+/* Hero */
+.ld-hero{background:linear-gradient(160deg,#E8474D 0%,#DB1A21 55%,#A51419 100%);color:#fff;border-radius:24px;padding:24px 1rem;margin-bottom:24px;text-align:center;position:relative;overflow:hidden;box-shadow:0 5px 10px rgba(12,9,42,0.1)}
+.ld-hero::before,.ld-hero::after{content:'';position:absolute;border-radius:50%;background:rgba(255,255,255,.14)}
+.ld-hero::before{width:160px;height:160px;top:-60px;left:-50px}
+.ld-hero::after{width:120px;height:120px;bottom:-50px;right:-30px}
+.ld-hero > *{position:relative;z-index:1}
+.ld-hero-badge{display:inline-block;background:rgba(255,255,255,.25);border-radius:50rem;padding:3px 12px;font-size:.75rem;font-weight:bold;letter-spacing:.04em;text-transform:uppercase;margin-bottom:.75rem}
+.ld-hero-gift{width:84px;height:84px;border-radius:50%;background:#fff;color:#DB1A21;display:inline-flex;align-items:center;justify-content:center;font-size:2.6rem;margin-bottom:.75rem;box-shadow:0 5px 10px rgba(12,9,42,0.12)}
+.ld-hero-title{font-size:1.3125rem;font-weight:bold;margin-bottom:.25rem;text-shadow:0 3px 10px rgba(12,9,42,0.1)}
+.ld-hero-prize{font-size:.9375rem;margin-bottom:1rem}
+.ld-countdown{display:flex;justify-content:center;gap:8px;margin-bottom:1rem}
+.ld-countdown div{background:#fff;color:#0C092A;border-radius:12px;min-width:58px;padding:6px 4px;line-height:1.1}
+.ld-countdown b{display:block;font-size:1.25rem}
+.ld-countdown span{font-size:.6875rem;color:#969696;text-transform:uppercase}
+.ld-dates{background:#fff;border-radius:16px;color:#0C092A;text-align:left;font-size:.875rem}
+.ld-dates-row{display:flex;align-items:center;padding:.65rem .875rem}
+.ld-dates-row + .ld-dates-row{border-top:1px solid rgba(150,150,150,.2)}
+.ld-dates-row .quiz-info-meta-circle{flex-shrink:0;margin-right:.6rem}
+.ld-dates-label{color:#969696;font-size:.75rem;line-height:1.2}
+.ld-dates-value{font-weight:bold}
+
+/* My tickets */
+.ld-tickets{display:flex;align-items:center;gap:1rem;margin-bottom:1rem}
+.ld-ticket-shape{background:#FFEFEF;color:#DB1A21;border-radius:12px;padding:10px 18px;font-size:2rem;font-weight:bold;position:relative;min-width:96px;text-align:center;line-height:1}
+.ld-ticket-shape::before,.ld-ticket-shape::after{content:'';position:absolute;top:50%;width:14px;height:14px;background:#fff;border-radius:50%;transform:translateY(-50%)}
+.ld-ticket-shape::before{left:-7px}
+.ld-ticket-shape::after{right:-7px}
+.ld-ticket-shape small{display:block;font-size:.6875rem;font-weight:bold;letter-spacing:.05em;text-transform:uppercase;margin-top:4px}
+.ld-muted{color:#969696;font-size:.875rem}
+
+/* How to earn */
+.ld-steps{list-style:none;padding:0;margin:0 0 1rem}
+.ld-steps li{display:flex;gap:.75rem;margin-bottom:1rem}
+.ld-steps li:last-child{margin-bottom:0}
+.ld-step-num{width:32px;height:32px;border-radius:50%;background:#DB1A21;color:#fff;font-weight:bold;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.ld-step-title{font-weight:bold;color:#0C092A}
+.ld-rule{background:#FFEFEF;border-radius:16px;padding:.75rem .875rem;font-size:.875rem;color:#0C092A}
+.ld-rule b{color:#A51419}
+
+/* Ticket history */
+.ld-history .history-list-pict{border-radius:8px}
+.ld-history .history-list-info{padding-right:.5rem;max-width:none}
+.ld-plus{background:#47c475;color:#fff;border-radius:50rem;font-weight:bold;font-size:.8125rem;padding:4px 10px;white-space:nowrap;align-self:center}
+.ld-plus.zero{background:#DFDFDF;color:#969696}
+.ld-history-total{display:flex;justify-content:space-between;padding:1rem;font-weight:bold;border-top:1px solid rgba(150,150,150,.25)}
+.ld-empty{text-align:center;padding:24px 1rem;color:#969696}
+.ld-empty .fa{font-size:2rem;color:#DFDFDF;display:block;margin-bottom:.5rem}
+
+/* Winners */
+.ld-result{border-radius:24px;padding:24px 1rem;text-align:center;margin-bottom:24px;color:#fff}
+.ld-result.win{background:linear-gradient(160deg,#47c475,#2fa85c)}
+.ld-result.lose{background:#fff;color:#0C092A}
+.ld-result .fa{font-size:2.5rem;margin-bottom:.5rem;display:block}
+.ld-result.lose .fa{color:#DB1A21}
+.ld-result-title{font-size:1.25rem;font-weight:bold;margin-bottom:.25rem}
+.ld-winner-rank{background:#FFCC5F}
+.ld-winner-prize{font-size:.75rem;font-weight:bold;color:#A51419;background:#FFEFEF;border-radius:50rem;padding:4px 10px;white-space:nowrap}
+
+/* Terms */
+.ld-terms summary{font-weight:bold;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
+.ld-terms summary::-webkit-details-marker{display:none}
+.ld-terms summary::after{content:'\e80c';font-family:"quizy-flash";color:#969696;transition:transform .2s}
+.ld-terms[open] summary::after{transform:rotate(180deg)}
+.ld-terms ol{margin:1rem 0 0;padding-left:1.1rem;color:#969696;font-size:.875rem}
+.ld-terms li{margin-bottom:.4rem}
+
+/* ---------- Prototype annotations ---------- */
+.ld-note{display:none}
+body.ld-notes .ld-note{display:inline-flex;align-items:center;gap:4px;font-size:.6875rem;font-weight:bold;letter-spacing:.02em;border-radius:6px;padding:2px 8px;margin-bottom:8px;border:1.5px dashed currentColor;background:#fff;line-height:1.5}
+body.ld-notes .ld-note.new{color:#A51419}
+body.ld-notes .ld-note.existing{color:#2fa85c}
+body.ld-notes .ld-note.tbc{color:#A51419}
+body.ld-notes .ld-flag{display:inline}
+.ld-flag{display:none;font-size:.6875rem;font-weight:bold;color:#d6336c;background:#fff0f4;border:1.5px dashed #d6336c;border-radius:6px;padding:1px 6px;margin-left:4px;white-space:nowrap}
+.ld-annot{position:relative}
+
+/* Review panel */
+.ld-review-btn{position:fixed;left:16px;bottom:96px;z-index:120;background:#0C092A;color:#fff;border:0;border-radius:50rem;padding:8px 14px;font-size:.8125rem;font-weight:bold;box-shadow:0 4px 14px rgba(12,9,42,.3)}
+.ld-panel{position:fixed;left:0;right:0;bottom:0;z-index:130;background:#fff;border-radius:24px 24px 0 0;box-shadow:0 -6px 24px rgba(12,9,42,.25);padding:1rem 1rem 1.25rem;max-width:480px;margin:0 auto;max-height:80vh;overflow:auto;display:none;font-size:.875rem;color:#0C092A}
+.ld-panel.open{display:block}
+.ld-panel h6{font-weight:bold;font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;color:#969696;margin:1rem 0 .5rem}
+.ld-panel h6:first-of-type{margin-top:0}
+.ld-chips{display:flex;flex-wrap:wrap;gap:6px}
+.ld-chip{border:1.5px solid #DFDFDF;background:#fff;border-radius:50rem;padding:5px 12px;font-size:.8125rem;color:#0C092A}
+.ld-chip.on{border-color:#DB1A21;background:#FFEFEF;color:#A51419;font-weight:bold}
+.ld-panel select,.ld-panel input[type=number]{border:1.5px solid #DFDFDF;border-radius:8px;padding:4px 6px;font-size:.8125rem;max-width:100%}
+.ld-panel input[type=number]{width:56px}
+.ld-panel-close{float:right;border:0;background:#FFEFEF;color:#DB1A21;width:32px;height:32px;border-radius:50%}
+.ld-legend{display:flex;flex-direction:column;gap:4px;font-size:.75rem}
