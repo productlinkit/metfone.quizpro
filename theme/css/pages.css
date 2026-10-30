@@ -68,7 +68,7 @@
 .contact-opt+.contact-opt{border-top:1px solid rgba(150,150,150,0.25)}
 .contact-opt:hover,.contact-opt:focus{color:#2F2F2F;background-color:#FFF5F5}
 .contact-opt-ico{width:48px;height:48px;flex-shrink:0;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:#fff}
-.contact-opt-ico.wa{background-color:#47c475}
+.contact-opt-ico.wa{background-color:#1E8449}
 .contact-opt-ico.mail{background-color:#E31C23}
 .contact-opt-text{flex:1;min-width:0;line-height:1.3}
 .contact-opt-text b{display:block;font-size:1.0625rem}

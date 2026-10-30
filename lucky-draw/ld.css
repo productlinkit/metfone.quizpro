@@ -1,6 +1,6 @@
 /* Lucky Draw – built on the QuizPro theme (theme/css/style.css).
    Palette: #E31C23 orange, #F18D91 yellow, #FFEFEF peach, #A51419 dark orange, #E31C23/#A51419 blue,
-   #47C475 green, #F18D91 pink, #2F2F2F text, #969696 muted, #DFDFDF line. Radius 24 / 16 / 12. */
+   #1E8449 green, #F18D91 pink, #2F2F2F text, #969696 muted, #DFDFDF line. Radius 24 / 16 / 12. */
 
 /* ---------- Icon (outline, same 2px rounded stroke as the fontello set) ---------- */
 .ld-ico{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
@@ -92,7 +92,7 @@
 .ld-draw-steps li.done{color:#2F2F2F}
 .ld-draw-steps li.now{color:#A51419;font-weight:bold}
 .ld-draw-steps li > span{width:22px;height:22px;border-radius:50%;border:2px solid #DFDFDF;display:inline-flex;align-items:center;justify-content:center;font-size:.625rem;flex-shrink:0}
-.ld-draw-steps li.done > span{background:#47C475;border-color:#47C475;color:#fff}
+.ld-draw-steps li.done > span{background:#1E8449;border-color:#1E8449;color:#fff}
 .ld-draw-steps li.now > span{border-color:#E31C23}
 .ld-tag{display:inline-block;font-size:.625rem;font-weight:bold;text-transform:uppercase;letter-spacing:.04em;border-radius:50rem;padding:1px 8px;background:rgba(223,223,223,.5);color:#969696;vertical-align:1px}
 .ld-tag.live{background:#F18D91;color:#fff}
@@ -141,23 +141,23 @@
 .ld-history .history-list-pict{border-radius:8px}
 .ld-history .history-list-info{padding-right:.5rem;max-width:none;min-width:0}
 .ld-history .history-list:last-child{border-bottom:0}
-.ld-plus{background:#47C475;color:#fff;border-radius:50rem;font-weight:bold;font-size:.8125rem;padding:4px 10px;white-space:nowrap;flex-shrink:0}
+.ld-plus{background:#1E8449;color:#fff;border-radius:50rem;font-weight:bold;font-size:.8125rem;padding:4px 10px;white-space:nowrap;flex-shrink:0}
 .ld-plus.zero{background:rgba(223,223,223,.5);color:#969696}
 .ld-empty{list-style:none;text-align:center;padding:28px 16px;color:#969696;font-size:.875rem}
 .ld-empty .fa{font-size:2rem;color:#F18D91;display:block;margin-bottom:8px}
 .ld-empty b{display:block;color:#2F2F2F}
 .ld-past-ico{width:45px;height:45px;border-radius:50%;background:rgba(223,223,223,.5);color:#969696;display:flex;align-items:center;justify-content:center;font-size:1.25rem;flex-shrink:0}
-.ld-past-ico.won{background:rgba(71,196,117,.15);color:#3bb768}
-.ld-won{color:#3bb768}
+.ld-past-ico.won{background:rgba(71,196,117,.15);color:#166B3A}
+.ld-won{color:#166B3A}
 
 /* ---------- After the draw ---------- */
 .ld-result{border-radius:24px;padding:24px 16px;text-align:center;box-shadow:0 5px 10px rgba(0,0,0,0.1)}
-.ld-result.win{background:linear-gradient(160deg,#47C475,#3bb768);color:#fff}
+.ld-result.win{background:linear-gradient(160deg,#1E8449,#166B3A);color:#fff}
 .ld-result.lose{background:#fff;color:#2F2F2F}
 .ld-result-ico{width:64px;height:64px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:1.75rem;margin-bottom:10px;background:rgba(255,255,255,.25);box-shadow:0 0 0 6px rgba(255,255,255,.15)}
 .ld-result.lose .ld-result-ico{background:#FFEFEF;color:#E31C23;box-shadow:none}
 .ld-result-title{font-size:1.25rem;font-weight:bold;margin-bottom:4px}
-.ld-result-prize{display:inline-block;background:#fff;color:#3bb768;font-weight:bold;border-radius:50rem;padding:4px 14px;margin:4px 0 8px}
+.ld-result-prize{display:inline-block;background:#fff;color:#166B3A;font-weight:bold;border-radius:50rem;padding:4px 14px;margin:4px 0 8px}
 .ld-result-text{font-size:.875rem;opacity:.95;margin-bottom:0}
 .ld-result.lose .ld-result-text{color:#969696;margin-bottom:16px}
 .ld-winner-rank{background:#F18D91}
@@ -177,7 +177,7 @@
 .ld-note{display:none}
 body.ld-notes .ld-note{display:inline-flex;align-items:center;gap:4px;font-size:.6875rem;font-weight:bold;letter-spacing:.02em;border-radius:6px;padding:2px 8px;margin-bottom:8px;border:1.5px dashed currentColor;background:#fff;line-height:1.5}
 body.ld-notes .ld-note.new{color:#A51419}
-body.ld-notes .ld-note.existing{color:#3bb768}
+body.ld-notes .ld-note.existing{color:#166B3A}
 body.ld-notes .ld-note.tbc{color:#A51419}
 body.ld-notes .ld-flag{display:inline}
 .ld-flag{display:none;font-size:.6875rem;font-weight:bold;color:#d6336c;background:#fff0f4;border:1.5px dashed #d6336c;border-radius:6px;padding:1px 6px;margin-left:4px;white-space:nowrap}
@@ -258,13 +258,13 @@ body.ld-notes .ld-flag{display:inline}
 /* Draw sequence: JS drives the wheel (spin -> ease out -> stop), then the winner is revealed */
 .ld-wheel-disc{animation:none}
 .ld-spin-stage.stopped .ld-spin-glow{animation:ld-glow .6s ease-in-out 3}
-.ld-hero-badge.done .ld-live-dot{animation:none;background:#47C475}
-.ld-reel.won{background:#47C475;color:#fff;animation:ld-pop .45s ease-out}
+.ld-hero-badge.done .ld-live-dot{animation:none;background:#1E8449}
+.ld-reel.won{background:#1E8449;color:#fff;animation:ld-pop .45s ease-out}
 @keyframes ld-pop{0%{transform:scale(.8)}60%{transform:scale(1.12)}100%{transform:scale(1)}}
 .ld-confetti{position:absolute;left:50%;top:44%;width:8px;height:12px;border-radius:2px;z-index:3;opacity:0;animation:ld-confetti 1.4s ease-out forwards}
 @keyframes ld-confetti{0%{opacity:1;transform:translate(0,0) rotate(0)}70%{opacity:1}100%{opacity:0;transform:translate(var(--x),calc(var(--y) + 140px)) rotate(var(--r))}}
-.ld-tag.done{background:#47C475;color:#fff}
-.ld-codes span.won{background:#47C475;border-color:#47C475;color:#fff;animation:ld-pop .45s ease-out}
+.ld-tag.done{background:#1E8449;color:#fff}
+.ld-codes span.won{background:#1E8449;border-color:#1E8449;color:#fff;animation:ld-pop .45s ease-out}
 
 /* Prize photos */
 .ld-prize-ico.lg.photo{width:84px;height:96px;padding:6px;border-radius:16px;background:#fff}

@@ -1,0 +1,392 @@
+/* Additions shared by every page: Play Now, avatar sheet, Coming soon, level cards, leaderboard, Light / Dark themes */
+
+/* ---------- Home: avatar button ---------- */
+.home-avatar{width:48px;height:48px;padding:0;border:0;background:none;flex-shrink:0}
+.home-avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover}
+.home-avatar .profile-avatar-edit{width:20px;height:20px;font-size:10px}
+
+/* ---------- Home: Play Now (same banner shape as Lucky Draw) ---------- */
+.ld-entry.qp-entry{padding:12px}
+.ld-entry.qp-entry::after{display:none}
+.qp-entry-copy{flex:1;min-width:0}
+.qp-entry-btn{display:inline-flex;align-items:center;gap:8px;background:#E31C23;color:#fff;font-weight:bold;font-size:1.25rem;border-radius:50rem;padding:10px 22px}
+.qp-entry-ill{position:relative;z-index:1;margin-left:auto;width:112px;height:92px;flex-shrink:0;display:block;border-radius:18px;overflow:hidden;background:rgba(255,255,255,.28)}
+.qp-entry-ill svg{width:100%;height:100%;display:block}
+.qm-all{animation:qmBob 2.2s ease-in-out infinite}
+.qm-arm{transform-box:fill-box;transform-origin:20% 100%;animation:qmWave 1.4s ease-in-out infinite}
+.qm-lids{transform-box:fill-box;transform-origin:50% 0;transform:scaleY(0);animation:qmBlink 4s infinite}
+.qm-sparks{animation:qmSpark 1.6s ease-in-out infinite}
+@keyframes qmBob{0%,100%{transform:translateY(1px)}50%{transform:translateY(-3px)}}
+@keyframes qmWave{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(9deg)}}
+@keyframes qmBlink{0%,92%,100%{transform:scaleY(0)}96%{transform:scaleY(1)}}
+@keyframes qmSpark{0%,100%{opacity:1}50%{opacity:0.25}}
+@media (prefers-reduced-motion:reduce){.qm-all,.qm-arm,.qm-lids,.qm-sparks{animation:none}}
+
+/* ---------- Home: Lucky Draw and Play Now banners, each with its own color (all themes) ---------- */
+html a.ld-entry.ld-entry-home,html a.ld-entry.ld-entry-home:hover,html a.ld-entry.ld-entry-home:focus{border-left:0;padding:12px 14px 12px 12px;background:linear-gradient(135deg,#3F22A8 0%,#6A3DE8 100%);color:#fff}
+html a.ld-entry.qp-entry,html a.ld-entry.qp-entry:hover,html a.ld-entry.qp-entry:focus{border-left:0;background:linear-gradient(135deg,#FFE27A 0%,#FF9F43 100%);color:#2F2F2F}
+html a.ld-entry.ld-entry-home::after{background:rgba(255,255,255,.1)}
+html .ld-entry-home .ld-entry-title,html .ld-entry-home .ld-entry-sub{color:#fff}
+html .ld-entry-home .ld-entry-go{background:rgba(255,255,255,.22);color:#fff}
+.ld-entry-home .ld-home-ill{position:relative;width:84px;height:84px;padding:6px;border-radius:18px;background:rgba(255,255,255,.16);box-shadow:none;overflow:hidden}
+.ld-home-ill .ld-ill{position:relative;z-index:1;animation:ldWheel 2.4s ease-in-out infinite}
+.ld-home-ill i{position:absolute;width:7px;height:7px;border-radius:50%;animation:qmSpark 1.6s ease-in-out infinite}
+.ld-home-ill i:nth-of-type(1){left:7px;top:8px;background:#FFE234}
+.ld-home-ill i:nth-of-type(2){right:7px;top:14px;background:#FF8FB8;animation-delay:.5s}
+.ld-home-ill i:nth-of-type(3){right:9px;bottom:9px;background:#fff;animation-delay:1s}
+@keyframes ldWheel{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+@media (prefers-reduced-motion:reduce){.ld-home-ill .ld-ill,.ld-home-ill i{animation:none}}
+
+/* ---------- Avatar bottom sheet ---------- */
+.avatar-sheet.offcanvas-bottom{height:auto;max-width:480px;margin:0 auto;border-radius:24px 24px 0 0;padding:20px 16px 24px}
+.avatar-sheet-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.avatar-sheet-title{margin:0;font-size:1.25rem;font-weight:bold;color:#2F2F2F}
+.avatar-sheet-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+.avatar-opt{aspect-ratio:1;border:3px solid transparent;border-radius:50%;background:none;padding:2px}
+.avatar-opt img{width:100%;height:100%;border-radius:50%;display:block}
+.avatar-opt.on{border-color:#E31C23}
+.avatar-upload{display:flex;align-items:center;justify-content:center;gap:8px;margin:0;font-weight:bold}
+
+/* ---------- Coming soon categories ---------- */
+.quiz-box{position:relative}
+.quiz-box.is-soon img,.quiz-list a.is-soon img{filter:grayscale(1);opacity:0.5}
+html:not([data-theme="dark"]) .quiz-box.is-soon .quiz-box-title,html:not([data-theme="dark"]) .quiz-list a.is-soon .quiz-list-info-title{color:#6B6B6B}
+html[data-theme="dark"] .quiz-box.is-soon .quiz-box-title,html[data-theme="dark"] .quiz-list a.is-soon .quiz-list-info-title{color:#A8A8B0}
+.soon-badge{display:inline-block;background:#5E5E5E;color:#fff;font-size:0.625rem;font-weight:bold;line-height:1.3;border-radius:50rem;padding:2px 7px;white-space:nowrap}
+.quiz-box .soon-badge{position:absolute;top:0;left:50%;transform:translateX(-50%)}
+.quiz-list a.is-soon{position:relative}
+.quiz-list a.is-soon .soon-badge{position:absolute;top:0;right:0}
+.qp-toast{background:#2F2F2F;white-space:nowrap}
+
+/* ---------- Difficulty level screen: red like the rest of the app, white cards ---------- */
+#level .modal-content,#level .modal-level{background:linear-gradient(180deg,#A51419 0,#E31C23 300px)}
+#level .modal-level-title{color:#fff;font-size:1.5rem}
+.modal-level-option .level-card{--lv:#166B3A;--lv2:#1E8449;display:flex;align-items:center;gap:12px;min-height:92px;padding:14px;margin-bottom:14px;border-radius:24px;background:#fff;color:#2F2F2F;font-weight:bold;font-size:1.25rem;text-decoration:none;box-shadow:0 5px 10px rgba(0,0,0,0.16);transition:transform .1s}
+.modal-level-option .level-card:active{transform:scale(0.98)}
+.level-card.level-2{--lv:#C2410C;--lv2:#EA580C}
+.level-card.level-3{--lv:#6A2FB8;--lv2:#7C3AED}
+.level-card-ico{width:60px;height:60px;flex-shrink:0;border-radius:50%;background:linear-gradient(135deg,var(--lv2) 0%,var(--lv) 100%);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.75rem}
+.level-card-name{flex:1;min-width:0}
+.modal-level-option .level-card .add-point{position:static;transform:none;flex-shrink:0;font-size:0.875rem;font-weight:bold;margin:0;padding:6px 10px;background:var(--lv);color:#fff}
+html[data-theme="light"] #level .modal-content,html[data-theme="light"] #level .modal-level{background:#F7F4F4}
+html[data-theme="dark"] #level .modal-content,html[data-theme="dark"] #level .modal-level{background:#15151B}
+html[data-theme="dark"] .modal-level-option .level-card{background:#24242C;color:#F1F1F4}
+
+/* ---------- Result: which answers were right or wrong ---------- */
+.res-review{text-align:left;margin-top:24px;margin-bottom:16px;padding-top:24px}
+.res-review[hidden]{display:none}
+.res-review-list{list-style:none;margin:0;padding:0}
+.res-review-item{display:flex;align-items:flex-start;gap:10px;padding:10px 0}
+.res-review-item+.res-review-item{border-top:1px solid rgba(150,150,150,0.25)}
+.res-review-item p{margin:0 0 2px;color:#2F2F2F;font-weight:bold;line-height:1.3}
+.res-review-item small{color:#6E6E6E;font-size:0.8125rem}
+.res-review-item small b{color:#2F2F2F}
+.res-review-item small b.is-correct{color:#1E8449}
+.res-review-opp{display:block;margin-top:2px}
+.res-review-opp.right .fa{color:#1E8449}
+.res-review-opp.wrong .fa{color:#D32F2F}
+.res-review-ico{width:28px;height:28px;flex-shrink:0;border-radius:50%;display:flex !important;align-items:center;justify-content:center;color:#fff;font-size:0.875rem;background:#6B6B6B}
+.res-review-item.right .res-review-ico{background:#1E8449}
+.res-review-item.wrong .res-review-ico{background:#D32F2F}
+html[data-theme="dark"] .res-review-item p,html[data-theme="dark"] .res-review-item small b{color:#F1F1F4}
+html[data-theme="dark"] .res-review-item small{color:#B5B5BD}
+html[data-theme="dark"] .res-review-item small b.is-correct{color:#5EE08F}
+
+/* ---------- Profile: theme value and sound switch ---------- */
+.menu-theme i{width:14px;height:14px;border-radius:50%;display:inline-block;box-shadow:0 0 0 1px rgba(150,150,150,0.5)}
+.menu-switch::before{display:none}
+.qp-switch{margin-left:auto;margin-right:0.25rem;position:relative;width:44px;height:26px;flex-shrink:0;pointer-events:none}
+.qp-switch input{opacity:0;width:0;height:0;position:absolute}
+.qp-switch span{position:absolute;inset:0;border-radius:50rem;background:#DFDFDF;transition:background .2s}
+.qp-switch span::after{content:'';position:absolute;left:3px;top:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,0.25);transition:transform .2s}
+.qp-switch input:checked+span{background:#1E8449}
+.qp-switch input:checked+span::after{transform:translateX(18px)}
+
+/* ---------- Leaderboard ---------- */
+.opp-initial{display:flex;align-items:center;justify-content:center;width:100%;height:100%;border-radius:50%;color:#fff;font-weight:bold;font-size:1.25em}
+.lb-podium{display:grid;grid-template-columns:1fr 1.15fr 1fr;align-items:end;gap:8px;margin:28px 0 16px}
+.lb-step{--medal:#B8C0CC;position:relative;display:flex;flex-direction:column;align-items:center;min-width:0;text-align:center;color:#fff}
+.lb-step.gold{--medal:#F5B93B}
+.lb-step.bronze{--medal:#CD7F45}
+.lb-crown{position:absolute;top:-24px;color:#F5B93B;font-size:1.5rem}
+.lb-crown::before{margin:0}
+.lb-step-ava{position:relative;display:block;width:68px;height:68px;border-radius:50%;border:4px solid var(--medal);background:#DFDFDF;margin-bottom:12px}
+.gold .lb-step-ava{width:84px;height:84px}
+.lb-step-ava img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}
+.lb-step-ava b{position:absolute;left:50%;bottom:-12px;transform:translateX(-50%);width:24px;height:24px;border-radius:50%;background:var(--medal);color:#fff;font-size:0.875rem;line-height:24px;border:2px solid #fff;box-sizing:content-box}
+.lb-step-name{font-weight:bold;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lb-step-score{font-size:0.9375rem;margin-bottom:6px}
+.lb-step-base{display:block;width:100%;height:40px;border-radius:14px 14px 0 0;background:var(--medal);box-shadow:0 5px 10px rgba(0,0,0,0.12)}
+.gold .lb-step-base{height:68px}
+.bronze .lb-step-base{height:28px}
+.lb-list{list-style:none;margin:0;padding:0}
+.lb-row{display:flex;align-items:center;gap:12px;padding:12px 16px}
+.lb-row+.lb-row{border-top:1px solid rgba(150,150,150,0.25)}
+.lb-row.is-me{background:#FFEFEF;border-radius:16px}
+.lb-rank{width:24px;flex-shrink:0;text-align:center;font-weight:bold;color:#6B6B6B}
+.lb-ava{width:44px;height:44px;flex-shrink:0;border-radius:50%;background:#DFDFDF;overflow:hidden}
+.lb-ava img{width:100%;height:100%;object-fit:cover;display:block}
+.lb-name{flex:1;min-width:0;font-weight:bold;color:#2F2F2F;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lb-score{flex-shrink:0;font-weight:bold;color:#E31C23}
+.lb-section-title{color:#fff;font-size:1.25rem;font-weight:bold;margin:24px 0 12px}
+.lb-section-title .fa{margin-right:4px}
+.lb-prizes{display:grid;gap:10px;margin-bottom:16px}
+.lb-prize{--medal:#E31C23;display:flex;align-items:center;gap:12px;background:#fff;border-radius:24px;padding:12px 16px;box-shadow:0 5px 10px rgba(0,0,0,0.08)}
+.lb-prize.gold{--medal:#F5B93B}
+.lb-prize.silver{--medal:#9AA3B0}
+.lb-prize.bronze{--medal:#CD7F45}
+.lb-prize-ico{width:48px;height:48px;flex-shrink:0;border-radius:50%;background:var(--medal);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.5rem}
+.lb-prize-info{flex:1;min-width:0;line-height:1.25}
+.lb-prize-info small{display:block;color:#6B6B6B;font-weight:bold}
+.lb-prize-info b{display:block;color:#2F2F2F;font-size:1.0625rem}
+.lb-prize-need{flex-shrink:0;text-align:right;font-size:0.75rem;color:#6B6B6B;line-height:1.25}
+.lb-prize-need b{display:block;font-size:1rem;color:#E31C23}
+
+/* ---------- Theme: Light ---------- */
+html[data-theme="light"] body{background-color:#F7F4F4}
+html[data-theme="light"] body::before{background:linear-gradient(180deg,#FFD9DA 0%,transparent 100%)}
+html[data-theme="light"] .page-header,
+html[data-theme="light"] .page-header-back,
+html[data-theme="light"] .page-header-score,
+html[data-theme="light"] .swipe-counter,
+html[data-theme="light"] .hist-count,
+html[data-theme="light"] .lang-current,
+html[data-theme="light"] .rules-intro,
+html[data-theme="light"] .rules-help,
+html[data-theme="light"] .contact-hero,
+html[data-theme="light"] .contact-info,
+html[data-theme="light"] .contact-faq,
+html[data-theme="light"] .res-ann,
+html[data-theme="light"] .res-answered,
+html[data-theme="light"] .res-btn-ghost,
+html[data-theme="light"] .text-white,
+html[data-theme="light"] .lb-section-title,
+html[data-theme="light"] .lb-step-name,
+html[data-theme="light"] .lb-step-score,
+html[data-theme="light"] .modal-level-title,
+html[data-theme="light"] .modal-level-header{color:#2F2F2F !important}
+html[data-theme="light"] .logo{background:#E31C23;border-radius:50rem;padding:4px 12px;width:auto;height:auto;display:inline-block}
+html[data-theme="light"] .logo img{height:32px;width:auto}
+html[data-theme="light"] .res-btn-ghost{border-color:#969696;background:#fff}
+html[data-theme="light"] .home-profile,html[data-theme="light"] .featured-quiz,html[data-theme="light"] .card-simple,html[data-theme="light"] .card-simple-outer,html[data-theme="light"] .lb-prize{box-shadow:0 2px 10px rgba(0,0,0,0.08)}
+
+html[data-theme="light"] .game-ava{border-color:#E31C23}
+html[data-theme="light"] .game-timer-track{stroke:#F7BBBD}
+html[data-theme="light"] .game-timer-ring{stroke:#E31C23}
+html[data-theme="light"] .game-timer.is-low .game-timer-ring{stroke:#C2410C}
+html[data-theme="light"] .game-timer.is-low #countdown-number{color:#C2410C}
+html[data-theme="light"] .game-gain{color:#1E8449}
+html[data-theme="light"] .game-progress i{background:#F7BBBD}
+html[data-theme="light"] .game-progress i.on{background:#E31C23}
+
+/* ---------- Theme: Dark ---------- */
+html[data-theme="dark"] body{background-color:#15151B;color:#F1F1F4}
+html[data-theme="dark"] body::before{background:linear-gradient(180deg,#2A1416 0%,transparent 100%)}
+html[data-theme="dark"] .bottom-nav-bg,
+html[data-theme="dark"] .card-simple,
+html[data-theme="dark"] .card-simple-outer,
+html[data-theme="dark"] .featured-quiz,
+html[data-theme="dark"] .friends-box,
+html[data-theme="dark"] .hist-tools,
+html[data-theme="dark"] .home-profile,
+html[data-theme="dark"] .ld-chip,
+html[data-theme="dark"] .ld-hero-gift,
+html[data-theme="dark"] .ld-live-dot,
+html[data-theme="dark"] .ld-panel,
+html[data-theme="dark"] .ld-panel-card,
+html[data-theme="dark"] .ld-prize-photo,
+html[data-theme="dark"] .ld-reel,
+html[data-theme="dark"] .ld-result-prize,
+html[data-theme="dark"] .ld-result.lose,
+html[data-theme="dark"] .page-title,
+html[data-theme="dark"] .play-btn,
+html[data-theme="dark"] .play-card,
+html[data-theme="dark"] .quiz-info,
+html[data-theme="dark"] .res-card,
+html[data-theme="dark"] .res-confetti i:nth-child(4n),
+html[data-theme="dark"] .res-stat,
+html[data-theme="dark"] .rules-acc,
+html[data-theme="dark"] .toast-ico,
+html[data-theme="dark"] .toast-sparks i:nth-child(even),
+html[data-theme="dark"] body.ld-notes .ld-note,
+html[data-theme="dark"] .modal-content,
+html[data-theme="dark"] .offcanvas,
+html[data-theme="dark"] .play-card,
+html[data-theme="dark"] .play-btn,
+html[data-theme="dark"] .lb-prize{background-color:#24242C}
+html[data-theme="dark"] .contact-opt,
+html[data-theme="dark"] .final-score-more,
+html[data-theme="dark"] .final-score-top,
+html[data-theme="dark"] .friends-box ul li a,
+html[data-theme="dark"] .hist-dates input,
+html[data-theme="dark"] .hist-search input,
+html[data-theme="dark"] .lang-item,
+html[data-theme="dark"] .lang-title,
+html[data-theme="dark"] .ld-chip,
+html[data-theme="dark"] .ld-countdown b,
+html[data-theme="dark"] .ld-draw-steps li.done,
+html[data-theme="dark"] .ld-em,
+html[data-theme="dark"] .ld-empty b,
+html[data-theme="dark"] .ld-entry,
+html[data-theme="dark"] .ld-panel,
+html[data-theme="dark"] .ld-panel-card,
+html[data-theme="dark"] .ld-prize .ld-prize-name,
+html[data-theme="dark"] .ld-reel,
+html[data-theme="dark"] .ld-result.lose,
+html[data-theme="dark"] .ld-rule,
+html[data-theme="dark"] .ld-stat-guest,
+html[data-theme="dark"] .ld-step-h b,
+html[data-theme="dark"] .ld-track-stats b,
+html[data-theme="dark"] .ld-track-sub,
+html[data-theme="dark"] .menu-list a,
+html[data-theme="dark"] .play-card p,
+html[data-theme="dark"] .profile-name-edit,
+html[data-theme="dark"] .quiz-box,
+html[data-theme="dark"] .quiz-info-content-title,
+html[data-theme="dark"] .quiz-list-wrapper .quiz-list a,
+html[data-theme="dark"] .res-points,
+html[data-theme="dark"] .res-stat b,
+html[data-theme="dark"] .rules-head,
+html[data-theme="dark"] .play-card p,
+html[data-theme="dark"] .lb-name,
+html[data-theme="dark"] .lb-prize-info b,
+html[data-theme="dark"] .avatar-sheet-title,
+html[data-theme="dark"] .modal-body,
+html[data-theme="dark"] .modal-level-title{color:#F1F1F4}
+html[data-theme="dark"] .play-btn.right{background-color:#1E8449}
+html[data-theme="dark"] .play-btn.wrong{background-color:#D32F2F}
+html[data-theme="dark"] .play-btn.is-true:not(.right):not(.wrong){color:#5EE08F}
+html[data-theme="dark"] .play-btn.is-false:not(.right):not(.wrong){color:#FF8A8F;border-color:#FF8A8F}
+html[data-theme="dark"] .menu-list-ico,
+html[data-theme="dark"] .page-title,
+html[data-theme="dark"] .lb-score,
+html[data-theme="dark"] .res-solo b{color:#F18D91}
+html[data-theme="dark"] .bottom-nav .active .nav-box a{color:#F18D91}
+html[data-theme="dark"] .lb-row.is-me{background:#3A2326}
+html[data-theme="dark"] .ld-entry,
+html[data-theme="dark"] .ld-entry:hover,
+html[data-theme="dark"] .ld-entry:focus{background:#24242C;color:#F1F1F4}
+html[data-theme="dark"] .ld-entry-go,
+html[data-theme="dark"] .ld-prize,
+html[data-theme="dark"] .ld-rule,
+html[data-theme="dark"] .ld-countdown div,
+html[data-theme="dark"] .ld-track-stats div:not(.main),
+html[data-theme="dark"] .ld-chip.on,
+html[data-theme="dark"] .ld-codes span:not(.won),
+html[data-theme="dark"] .ld-winner-prize,
+html[data-theme="dark"] .quiz-info-meta,
+html[data-theme="dark"] .rules-ico,
+html[data-theme="dark"] .contact-opt-go,
+html[data-theme="dark"] .hist-chips button:not(.active),
+html[data-theme="dark"] .lang-item.active,
+html[data-theme="dark"] .hist-search{background-color:#3A2326}
+html[data-theme="dark"] .hist-search input,
+html[data-theme="dark"] .form-control{background-color:#2E2E37;border-color:#44444F;color:#F1F1F4}
+html[data-theme="dark"] .ld-entry-sub,
+html[data-theme="dark"] .ld-rule,
+html[data-theme="dark"] .ld-countdown b,
+html[data-theme="dark"] .ld-track-stats b,
+html[data-theme="dark"] .ld-prize .ld-prize-name,
+html[data-theme="dark"] .ld-codes span:not(.won),
+html[data-theme="dark"] .ld-winner-prize{color:#F1F1F4}
+html[data-theme="dark"] .ld-countdown span,
+html[data-theme="dark"] .ld-prize-rank{color:#F18D91}
+html[data-theme="dark"] .ld-tabs button:not(.on){color:#F1F1F4}
+html[data-theme="dark"] .btn-close{filter:invert(1)}
+
+/* ---------- Contrast: text 4.5:1, icons and large text 3:1 (WCAG AA) ---------- */
+:where(html:not([data-theme="dark"])) .bottom-nav .nav-box-ico,
+:where(html:not([data-theme="dark"])) .confirm-text,
+:where(html:not([data-theme="dark"])) .contact-opt-text small,
+:where(html:not([data-theme="dark"])) .friends-box-status,
+:where(html:not([data-theme="dark"])) .hist-dates label,
+:where(html:not([data-theme="dark"])) .hist-empty,
+:where(html:not([data-theme="dark"])) .hist-search span,
+:where(html:not([data-theme="dark"])) .history-list-date,
+:where(html:not([data-theme="dark"])) .history-list-info-stats,
+:where(html:not([data-theme="dark"])) .lang-name small,
+:where(html:not([data-theme="dark"])) .ld-draw-steps li,
+:where(html:not([data-theme="dark"])) .ld-empty,
+:where(html:not([data-theme="dark"])) .ld-muted,
+:where(html:not([data-theme="dark"])) .ld-panel h6,
+:where(html:not([data-theme="dark"])) .ld-panel-foot,
+:where(html:not([data-theme="dark"])) .ld-past-ico,
+:where(html:not([data-theme="dark"])) .ld-plus.zero,
+:where(html:not([data-theme="dark"])) .ld-result.lose .ld-result-text,
+:where(html:not([data-theme="dark"])) .ld-sec-sub,
+:where(html:not([data-theme="dark"])) .ld-stat-label,
+:where(html:not([data-theme="dark"])) .ld-step-h small,
+:where(html:not([data-theme="dark"])) .ld-tabs button,
+:where(html:not([data-theme="dark"])) .ld-tag,
+:where(html:not([data-theme="dark"])) .ld-terms ol,
+:where(html:not([data-theme="dark"])) .ld-terms summary::after,
+:where(html:not([data-theme="dark"])) .ld-track-stats span,
+:where(html:not([data-theme="dark"])) .ld-track-sub em,
+:where(html:not([data-theme="dark"])) .leaderboard-coin,
+:where(html:not([data-theme="dark"])) .leaderboard-winner-info-stats,
+:where(html:not([data-theme="dark"])) .menu-lang,
+:where(html:not([data-theme="dark"])) .multiple-answer li label .bullet,
+:where(html:not([data-theme="dark"])) .opponent.finding,
+:where(html:not([data-theme="dark"])) .profile-sub-text,
+:where(html:not([data-theme="dark"])) .profile-unsub,
+:where(html:not([data-theme="dark"])) .quiz-info-content,
+:where(html:not([data-theme="dark"])) .quiz-list-wrapper .quiz-list .quiz-list-info p,
+:where(html:not([data-theme="dark"])) .res-solo small,
+:where(html:not([data-theme="dark"])) .res-stat small,
+:where(html:not([data-theme="dark"])) .rules-chev,
+:where(html:not([data-theme="dark"])) .unsub-modal-text{color:#6B6B6B}
+.menu-list::before,.quiz-list-wrapper .quiz-list::before{color:#8C8C8C}
+
+/* white text on pink or faded backgrounds */
+.page-title-circle{background:linear-gradient(160deg,#E31C23 0%,#A51419 100%)}
+.quiz-info-meta-circle{background-color:#C4161C}
+.res-card-title{background:#A51419}
+html .ld-tag.live{background:#A51419;color:#fff}
+.leaderboard-winner-rank.ld-winner-rank{background:#A51419}
+.ld-result-text{opacity:1}
+.ld-cta.disabled,.ld-cta.button-grey{opacity:1;background-color:#6B6B6B;color:#fff}
+html .ld-prize-tag{background:#fff;color:#A51419}
+.ld-prize-qty,.lang-current-label,.contact-hero-sub,.res-answered,.ld-track-stats .main span{opacity:1;color:#fff}
+html[data-theme="light"] .lang-current-label,html[data-theme="light"] .contact-hero-sub{color:#2F2F2F}
+.is-lose .res-ribbon{background:#6B6B6B}
+.is-lose .res-ribbon::before,.is-lose .res-ribbon::after{background:#4A4A4A}
+.res-crown,.lb-crown{color:#FFE234}
+html[data-theme="light"] .res-crown,html[data-theme="light"] .lb-crown{color:#A16207}
+.hist-chips button:not(.active){color:#A51419}
+
+.button-grey{background-color:#6B6B6B}
+.button-grey:hover,.button-grey:focus{background-color:#5A5A5A}
+
+/* medals carry dark text */
+.lb-step-ava b,.lb-prize-ico{color:#1F1F1F}
+
+/* buttons on the red page */
+.res-actions .button-primary,.res-actions .button-primary:hover,.res-actions .button-primary:focus{background:#fff;color:#C4161C}
+html[data-theme="light"] .res-actions .button-primary,html[data-theme="dark"] .res-actions .button-primary{background:#E31C23;color:#fff}
+
+/* answered: the button not chosen goes neutral instead of fading out */
+.play-btn:disabled{opacity:1}
+.play-btn:disabled:not(.right):not(.wrong){color:#6B6B6B;border-color:#BDBDBD}
+
+/* dark theme leftovers */
+html[data-theme="dark"] .res-points{background:#24242C;color:#F1F1F4}
+html[data-theme="dark"] .res-side-name{color:#F1F1F4}
+html[data-theme="dark"] .res-side-score{color:#B5B5BD}
+html[data-theme="dark"] .is-win .me .res-side-score,html[data-theme="dark"] .is-lose .opp .res-side-score{color:#5EE08F}
+html[data-theme="dark"] .res-vs-badge{background:#3A2326;color:#FF8A8F}
+html[data-theme="dark"] .play-opp-answer{background:#24242C;color:#F1F1F4}
+html[data-theme="dark"] .play-opp-answer.right .fa,html[data-theme="dark"] .res-review-opp.right .fa{color:#5EE08F}
+html[data-theme="dark"] .play-opp-answer.wrong .fa,html[data-theme="dark"] .res-review-opp.wrong .fa{color:#FF8A8F}
+html[data-theme="dark"] .rules-body{color:#C8C8CE}
+html[data-theme="dark"] .ld-tag:not(.live):not(.done){background:#3A3A44;color:#E0E0E6}
+html[data-theme="dark"] .ld-draw-steps li.now,html[data-theme="dark"] .ld-draw-steps li.now .fa{color:#FF8A8F}
+html[data-theme="dark"] .ld-result-prize{background:#fff}
+html[data-theme="dark"] .leaderboard-winner-info-stats{color:#C8C8CE}
+html[data-theme="dark"] .ld-stat-big b,html[data-theme="dark"] .ld-rule b{color:#FF8A8F}
+html[data-theme="dark"] .ld-tabs{background:#3A3A44}
+html[data-theme="dark"] .ld-plus.zero{background:#3A3A44;color:#D0D0D6}
+html[data-theme="dark"] .ld-entry:not(.ld-entry-home) .ld-entry-title,
+html[data-theme="dark"] .lb-prize-need b,
+html[data-theme="dark"] .hist-chips button:not(.active){color:#FF8A8F}
+html[data-theme="dark"] .lb-rank,html[data-theme="dark"] .lb-prize-info small,html[data-theme="dark"] .lb-prize-need{color:#B5B5BD}
+html[data-theme="dark"] .play-btn:disabled:not(.right):not(.wrong){color:#B5B5BD;border-color:#55555F}

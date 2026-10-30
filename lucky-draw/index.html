@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quizy Flash</title>
-    <link rel="stylesheet" href="../theme/css/bootstrap.min.css?v=red14">
+    <link rel="stylesheet" href="../theme/css/bootstrap.min.css?v=red21">
     <link rel="stylesheet" href="../theme/fontello/css/quizy-flash.css">
-    <link rel="stylesheet" href="../theme/css/style.css?v=red14">
+    <link rel="stylesheet" href="../theme/css/style.css?v=red21">
     <link rel="stylesheet" href="../ext/cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="ld.css?v=red14">
+    <link rel="stylesheet" href="ld.css?v=red21">
     <link rel="shortcut icon" type="image/x-icon" href="../theme/images/favicon-quizpro.ico">
+    <link rel="stylesheet" href="../theme/css/app.css?v=10">
+    <script src="../theme/js/theme.js?v=1"></script>
 </head>
 <body class="ld-page">
     <div class="content-wrapper">
@@ -32,13 +34,6 @@
                 </a>
             </div>
         </div>
-        <div class="col ">
-            <div class="nav-box">
-                <a href="../game/more/index.html" class="nav-box-ico">
-                    <span class="qf-icon-list"></span>
-                </a>
-            </div>
-        </div>
         <div class="col active">
             <div class="nav-box">
                 <a href="../lucky-draw/index.html" class="nav-box-ico">
@@ -55,7 +50,7 @@
         </div>
         <div class="col ">
             <div class="nav-box">
-                <a href="../login/index.html" class="nav-box-ico">
+                <a href="../profile/index.html" class="nav-box-ico">
                     <span class="qf-icon-profile"></span>
                 </a>
             </div>
@@ -95,9 +90,10 @@
     </div>
 
     <script src="../ext/code.jquery.com/jquery-3.6.1.min.js"></script>
-    <script src="../theme/js/session.js?v=2"></script>
-    <script src="../theme/js/game-demo.js?v=4"></script>
-    <script src="../theme/js/i18n.js?v=2"></script>
+    <script src="../theme/js/session.js?v=4"></script>
+    <script src="../theme/js/questions.js?v=1"></script>
+    <script src="../theme/js/game-demo.js?v=8"></script>
+    <script src="../theme/js/i18n.js?v=5"></script>
     <script src="../theme/js/bootstrap.bundle.min.js"></script>
     <script src="ld-config.js?v=2"></script>
     <script src="ld-icons.js?v=2"></script>
@@ -105,7 +101,6 @@
     (function () {
         var C = LD_CONFIG, A = LD_DEMO_ACTIVITY, $root = document.getElementById('ld-root');
         var STATES = [
-            ['guest', 'Guest (not logged in)'],
             ['upcoming', 'Not started'],
             ['active', 'Active'],
             ['active-empty', 'Active – 0 tickets'],

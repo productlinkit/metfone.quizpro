@@ -1,13 +1,13 @@
 /*
- * Demo login session (static site, no server).
- * Any MSISDN + password logs in; the user is kept in localStorage.
+ * Demo player (static site, no server, no login).
+ * Every visitor is a player straight away; the profile is kept in localStorage.
  * Load after jQuery and Bootstrap on every page.
  */
 (function () {
     var KEY = 'qp_user';
     var DEFAULT_AVATAR = 'theme/images/dp.png';
-    var MEMBER_PAGES = ['profile/index.html', 'profile/edit/index.html', 'game/history/index.html',
-        'game/match/index.html', 'game/play/index.html', 'game/result/index.html'];
+    var AVATAR_KEY = 'qp_avatar', SOUND_KEY = 'qp_sound';
+    var AVATAR_PRESETS = [1, 2, 3, 4, 5, 6, 7, 8].map(function (n) { return 'theme/images/avatars/' + n + '.svg'; });
 
     // Site root, worked out from this script's own URL (…/theme/js/session.js)
     var script = document.currentScript;
@@ -23,80 +23,67 @@
         try { return JSON.parse(raw); } catch (e) { return { msisdn: raw }; } // older demo stored the plain MSISDN
     }
     function save(u) { try { localStorage.setItem(KEY, JSON.stringify(u)); return true; } catch (e) { return false; } }
-    function loginUrl(next) { return ROOT + 'login/index.html?next=' + encodeURIComponent(next || page); }
-    function safeNext() {
-        var n = param('next') || '';
-        return /^([a-z0-9-]+\/)*index\.html$/.test(n) && n.indexOf('login/') !== 0 ? n : 'index.html';
-    }
 
     var user = load();
     if (user && typeof user !== 'object') user = { msisdn: String(user) };
+    if (!user) { user = { name: 'Guest', msisdn: '1234567890' }; save(user); }
 
-    if (!user && MEMBER_PAGES.indexOf(page) !== -1) { location.replace(loginUrl()); return; }
-    if (user && page === 'login/index.html') { location.replace(ROOT + safeNext()); return; }
+    // Avatar: a preset path or an uploaded photo (data URL)
+    function avatar() {
+        var v = null;
+        try { v = localStorage.getItem(AVATAR_KEY); } catch (e) {}
+        v = v || user.avatar || DEFAULT_AVATAR;
+        return /^data:/.test(v) ? v : ROOT + v;
+    }
+    function paintAvatars() { document.querySelectorAll('img[data-user-avatar]').forEach(function (img) { img.src = avatar(); }); }
+    function setAvatar(v) {
+        try { localStorage.setItem(AVATAR_KEY, v); } catch (e) { return false; }
+        paintAvatars();
+        return true;
+    }
+    // Crop to a square and shrink the photo so it fits in browser storage
+    function shrinkPhoto(file, done, fail) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            var img = new Image();
+            img.onload = function () {
+                var size = 200, c = document.createElement('canvas'), k = Math.min(img.width, img.height);
+                c.width = c.height = size;
+                c.getContext('2d').drawImage(img, (img.width - k) / 2, (img.height - k) / 2, k, k, 0, 0, size, size);
+                done(c.toDataURL('image/jpeg', 0.85));
+            };
+            img.onerror = fail;
+            img.src = reader.result;
+        };
+        reader.onerror = fail;
+        reader.readAsDataURL(file);
+    }
 
-    window.QP_SESSION = { user: user, root: ROOT, avatar: function () { return (user && user.avatar) || ROOT + DEFAULT_AVATAR; } };
+    window.QP_SESSION = { user: user, root: ROOT, avatar: avatar, setAvatar: setAvatar, shrinkPhoto: shrinkPhoto, AVATAR_PRESETS: AVATAR_PRESETS };
+
+    // Sound effects: every sound goes through here, so Off means silent everywhere
+    var SOUNDS = { tap: 'pop.mp3', correct: 'answer-correct.wav', wrong: 'answer-wrong.wav', tick: 'Ticking_Clock.wav' }, players = {};
+    window.QP_SOUND = {
+        on: function () { try { return localStorage.getItem(SOUND_KEY) !== 'off'; } catch (e) { return true; } },
+        set: function (on) { try { localStorage.setItem(SOUND_KEY, on ? 'on' : 'off'); } catch (e) {} },
+        play: function (name) {
+            if (!this.on() || !SOUNDS[name]) return;
+            var a = players[name] || (players[name] = new Audio(ROOT + 'theme/audio/' + SOUNDS[name]));
+            a.currentTime = 0;
+            var p = a.play();
+            if (p && p.catch) p.catch(function () {}); // browsers block sound until the first tap
+        }
+    };
 
     document.addEventListener('DOMContentLoaded', function () {
-        // Login: any MSISDN + password works
-        if (page === 'login/index.html') {
-            var form = document.querySelector('form');
-            form.addEventListener('submit', function (e) {
-                e.preventDefault();
-                var m = document.getElementById('msisdn'), p = document.getElementById('password'), ok = true;
-                [[m, 'Please enter your MSISDN'], [p, 'Please enter your password']].forEach(function (f) {
-                    var err = f[0].closest('.mb-3').querySelector('.text-danger');
-                    err.textContent = f[0].value.trim() ? '' : f[1];
-                    if (!f[0].value.trim()) ok = false;
-                });
-                if (!ok) return;
-                save({ msisdn: m.value.trim() });
-                location.href = ROOT + safeNext();
-            });
-        }
+        paintAvatars();
 
-        if (user) {
-            var name = user.name || user.msisdn;
-            // Profile tab goes to the profile instead of the login page
-            document.querySelectorAll('.bottom-nav a[href$="login/index.html"]').forEach(function (a) { a.href = ROOT + 'profile/index.html'; });
-            if (page === 'index.html') document.querySelectorAll('.home-profile-name').forEach(function (el) { el.textContent = name; });
-            if (page === 'profile/index.html') {
-                document.querySelectorAll('.home-profile-name').forEach(function (el) { el.textContent = user.name || 'Hello'; });
-                document.querySelectorAll('.home-profile-status').forEach(function (el) { el.textContent = user.msisdn; });
-            }
-            document.querySelectorAll('img[data-user-avatar]').forEach(function (img) { img.src = window.QP_SESSION.avatar(); });
-        } else {
-            // Guests: login links come back to this page afterwards
-            document.querySelectorAll('a[href$="login/index.html"]').forEach(function (a) { a.href = loginUrl(); });
+        var name = user.name || user.msisdn;
+        if (page === 'index.html') document.querySelectorAll('.home-profile-name').forEach(function (el) { el.textContent = name; });
+        if (page === 'profile/index.html') {
+            document.querySelectorAll('.home-profile-name').forEach(function (el) { el.textContent = user.name || 'Hello'; });
+            document.querySelectorAll('.home-profile-status').forEach(function (el) { el.textContent = user.msisdn; });
         }
-
-        // Logout asks for confirmation first
-        document.querySelectorAll('a[data-logout]').forEach(function (a) {
-            a.addEventListener('click', function (e) {
-                e.preventDefault();
-                var m = document.getElementById('modalLogout');
-                if (!m) {
-                    m = document.createElement('div');
-                    m.className = 'modal fade modal-standard';
-                    m.id = 'modalLogout';
-                    m.tabIndex = -1;
-                    m.innerHTML =
-                        '<div class="modal-dialog modal-dialog-centered"><div class="modal-content confirm-modal">' +
-                            '<span class="confirm-ico"><span class="qf-icon-out"></span></span>' +
-                            '<h3 class="modal-level-title mb-2">Log out?</h3>' +
-                            '<p class="confirm-text">You will need to log in again to play quizzes and collect Lucky Draw tickets.</p>' +
-                            '<button type="button" class="btn btn-lg button-primary w-100 mb-2" data-bs-dismiss="modal">Cancel</button>' +
-                            '<button type="button" class="btn btn-lg confirm-danger w-100" id="btnLogoutConfirm">Yes, Log out</button>' +
-                        '</div></div>';
-                    document.body.appendChild(m);
-                    m.querySelector('#btnLogoutConfirm').addEventListener('click', function () {
-                        try { localStorage.removeItem(KEY); } catch (err) {}
-                        location.href = ROOT + 'index.html';
-                    });
-                }
-                bootstrap.Modal.getOrCreateInstance(m).show();
-            });
-        });
 
         // Profile saved: short confirmation
         if (page === 'profile/index.html' && param('saved')) {
@@ -109,7 +96,7 @@
         }
 
         // Edit profile: save in the browser instead of posting to a server
-        if (page === 'profile/edit/index.html' && user) {
+        if (page === 'profile/edit/index.html') {
             var pform = document.querySelector('form'), nameIn = document.getElementById('username'),
                 fileIn = document.getElementById('avatar'), preview = document.querySelector('img[data-user-avatar]'), newAvatar = null;
             nameIn.value = user.name || '';
@@ -122,25 +109,14 @@
             ferr.className = 'text-danger d-block mt-1';
             fileIn.parentNode.appendChild(ferr);
 
-            // Shrink the photo so it fits in browser storage
             fileIn.addEventListener('change', function () {
                 ferr.textContent = '';
                 var file = fileIn.files[0]; if (!file) return;
                 if (!/^image\//.test(file.type)) { ferr.textContent = 'Please choose an image file'; fileIn.value = ''; return; }
-                var reader = new FileReader();
-                reader.onload = function () {
-                    var img = new Image();
-                    img.onload = function () {
-                        var size = 200, c = document.createElement('canvas'), k = Math.min(img.width, img.height);
-                        c.width = c.height = size;
-                        c.getContext('2d').drawImage(img, (img.width - k) / 2, (img.height - k) / 2, k, k, 0, 0, size, size);
-                        newAvatar = c.toDataURL('image/jpeg', 0.85);
-                        preview.src = newAvatar;
-                    };
-                    img.onerror = function () { ferr.textContent = 'This image could not be read'; };
-                    img.src = reader.result;
-                };
-                reader.readAsDataURL(file);
+                shrinkPhoto(file, function (src) {
+                    newAvatar = src;
+                    preview.src = newAvatar;
+                }, function () { ferr.textContent = 'This image could not be read'; });
             });
 
             pform.addEventListener('submit', function (e) {
@@ -149,8 +125,7 @@
                 err.textContent = v ? '' : 'Please enter your name';
                 if (!v) return;
                 user.name = v;
-                if (newAvatar) user.avatar = newAvatar;
-                if (!save(user)) { ferr.textContent = 'Could not save, the photo may be too large'; return; }
+                if (!save(user) || (newAvatar && !setAvatar(newAvatar))) { ferr.textContent = 'Could not save, the photo may be too large'; return; }
                 location.href = ROOT + 'profile/index.html?saved=1';
             });
         }

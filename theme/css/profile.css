@@ -11,7 +11,7 @@
 .profile-sub-text{font-size:0.8125rem;color:#969696}
 .profile-unsub{flex-shrink:0;background:none;border:1px solid rgba(150,150,150,0.5);color:#969696;border-radius:50rem;padding:6px 14px;font-size:0.875rem;font-weight:bold}
 .profile-unsub:hover,.profile-unsub:focus{border-color:#dc3545;color:#dc3545}
-.profile-unsub.is-subscribe{background-color:#47c475;border-color:#47c475;color:#fff}
+.profile-unsub.is-subscribe{background-color:#1E8449;border-color:#1E8449;color:#fff}
 .unsub-modal{padding:24px;border-radius:24px;text-align:center}
 .unsub-modal-text{color:#969696;margin-bottom:24px}
 .unsub-confirm{color:#dc3545;font-weight:bold;background:none}
@@ -23,6 +23,6 @@
 .menu-list-ico.fa{display:flex;line-height:1;font-size:1.25rem}
 .profile-avatar .profile-avatar-edit{display:flex}
 /* "Profile updated" confirmation */
-.saved-toast{position:fixed;left:50%;top:24px;transform:translateX(-50%);z-index:200;background:#47c475;color:#fff;font-weight:bold;border-radius:50rem;padding:8px 18px;box-shadow:0 5px 10px rgba(0,0,0,0.16);transition:opacity .3s,transform .3s}
+.saved-toast{position:fixed;left:50%;top:24px;transform:translateX(-50%);z-index:200;background:#1E8449;color:#fff;font-weight:bold;border-radius:50rem;padding:8px 18px;box-shadow:0 5px 10px rgba(0,0,0,0.16);transition:opacity .3s,transform .3s}
 .saved-toast span::before{margin-right:4px}
 .saved-toast.hide{opacity:0;transform:translate(-50%,-10px)}

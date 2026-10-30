@@ -4,14 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quizy Flash</title>
-    <link rel="stylesheet" href="../../theme/css/bootstrap.min.css?v=red14">
+    <link rel="stylesheet" href="../../theme/css/bootstrap.min.css?v=red21">
     <link rel="stylesheet" href="../../theme/fontello/css/quizy-flash.css">
-    <link rel="stylesheet" href="../../theme/css/style.css?v=red14">
+    <link rel="stylesheet" href="../../theme/css/style.css?v=red21">
     <link rel="stylesheet" href="../../theme/floating-copy/css/style.css">
     <link rel="stylesheet" href="../../ext/cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta name="csrf-token" content="qgXxqFLNSJc2zlNVlmRugW8P3CaFdQtzTCkWWKoq" />
     <link rel="shortcut icon" type="image/x-icon" href="../../theme/images/favicon-quizpro.ico">
-    <link rel="stylesheet" href="../../lucky-draw/ld.css?v=red14">
+    <link rel="stylesheet" href="../../theme/css/app.css?v=10">
+    <script src="../../theme/js/theme.js?v=1"></script>
+    <link rel="stylesheet" href="../../lucky-draw/ld.css?v=red21">
 </head>
 <body>
     
@@ -49,60 +51,14 @@
         <span>Leaderboard</span>
     </div>
 
-    <div class="card-simple-outer">
-        <ul class="leaderboard">
+    <div class="lb-podium" id="lbPodium"></div>
 
-                                                <li class="leaderboard-winner">
-                        <div class="row gx-0">
-                            <div class="col-9">
-                                <div class="d-flex w-100">
-                                    <div class="leaderboard-winner-pict">
-                                                                                                                                                        
-                                        <img src="../../uploads/user/1/ava-eissa.png" alt="Avatar">
-                                        <span class="leaderboard-winner-rank">1</span>
-                                    </div>
-                                    <div class="leaderboard-winner-info">
-                                        <h4 class="leaderboard-winner-info-name">9876543210</h4>
-                                        <div class="leaderboard-winner-info-stats">
-                                            Score <b>27340</b>, <span class="qf-icon-clock"></span> 720.07
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-3 text-end">
-                                <div class="leaderboard-coin">
-                                    <span class="coin"></span> 32630
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                                    <li class="leaderboard-winner">
-                        <div class="row gx-0">
-                            <div class="col-9">
-                                <div class="d-flex w-100">
-                                    <div class="leaderboard-winner-pict">
-                                                                                                                                                        
-                                        <img src="../../uploads/user/2/91819a12c87646f315a23b80fbf283ea.jpg" alt="Avatar">
-                                        <span class="leaderboard-winner-rank">2</span>
-                                    </div>
-                                    <div class="leaderboard-winner-info">
-                                        <h4 class="leaderboard-winner-info-name">1234567890</h4>
-                                        <div class="leaderboard-winner-info-stats">
-                                            Score <b>22250</b>, <span class="qf-icon-clock"></span> 580.17
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-3 text-end">
-                                <div class="leaderboard-coin">
-                                    <span class="coin"></span> 29150
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                            
-        </ul>
+    <div class="card-simple-outer">
+        <ul class="lb-list" id="lbList"></ul>
     </div>
+
+    <h3 class="lb-section-title"><span class="fa fa-gift"></span> Prizes</h3>
+    <div class="lb-prizes" id="lbPrizes"></div>
                   
             
         </div>
@@ -115,13 +71,6 @@
             <div class="nav-box">
                 <a href="../../index.html" class="nav-box-ico">
                     <span class="qf-icon-home"></span>
-                </a>
-            </div>
-        </div>
-        <div class="col ">
-            <div class="nav-box">
-                <a href="../../game/more/index.html" class="nav-box-ico">
-                    <span class="qf-icon-list"></span>
                 </a>
             </div>
         </div>
@@ -141,7 +90,7 @@
         </div>
         <div class="col ">
                                         <div class="nav-box">
-                    <a href="../../login/index.html" class="nav-box-ico">
+                    <a href="../../profile/index.html" class="nav-box-ico">
                         <span class="qf-icon-profile"></span>
                     </a>
                 </div>
@@ -191,11 +140,44 @@
     </div>
     
     <script src="../../ext/code.jquery.com/jquery-3.6.1.min.js"></script>
-    <script src="../../theme/js/session.js?v=2"></script>
-    <script src="../../theme/js/i18n.js?v=2"></script>
+    <script src="../../theme/js/session.js?v=4"></script>
+    <script src="../../theme/js/i18n.js?v=5"></script>
     <script src="../../theme/js/bootstrap.bundle.min.js"></script>
 
-    <script src="../../theme/js/custom.js?v=login2"></script>
+    <script src="../../theme/js/custom.js?v=3"></script>
+    <script src="../../theme/js/leaderboard-config.js?v=2"></script>
+    <script>
+    (function () {
+        var S = window.QP_SESSION, C = window.QP_LEADERBOARD, t = QP_I18N.t;
+        function esc(x) { return $('<div>').text(x).html(); }
+        function ava(p) {
+            if (p.me) return '<img src="' + S.avatar() + '" data-user-avatar alt="">';
+            if (p.avatar) return '<img src="' + S.root + p.avatar + '" alt="">';
+            return '<span class="opp-initial" style="background-color:' + p.color + '">' + esc(p.name.charAt(0)) + '</span>';
+        }
+        var u = S.user || {}, players = C.players.map(function (p) {
+            return p.me ? Object.assign({}, p, { name: u.name || u.msisdn || t('You') }) : p;
+        }).sort(function (a, b) { return b.score - a.score; });
+        function row(p, i) {
+            return '<li class="lb-row' + (p.me ? ' is-me' : '') + '"><span class="lb-rank">' + (i + 4) + '</span><span class="lb-ava">' + ava(p) + '</span>' +
+                '<span class="lb-name">' + esc(p.name) + '</span><span class="lb-score">' + p.score.toLocaleString('en-US') + '</span></li>';
+        }
+        // Podium: 2nd, 1st, 3rd
+        document.getElementById('lbPodium').innerHTML = [[1, 'silver'], [0, 'gold'], [2, 'bronze']].map(function (x) {
+            var p = players[x[0]];
+            return '<div class="lb-step ' + x[1] + (p.me ? ' is-me' : '') + '">' + (x[0] === 0 ? '<span class="lb-crown qf-icon-crown"></span>' : '') +
+                '<span class="lb-step-ava">' + ava(p) + '<b>' + (x[0] + 1) + '</b></span><span class="lb-step-name">' + esc(p.name) + '</span>' +
+                '<span class="lb-step-score">' + p.score.toLocaleString('en-US') + '</span><span class="lb-step-base"></span></div>';
+        }).join('');
+        document.getElementById('lbList').innerHTML = players.slice(3).map(row).join('');
+        var medals = { 1: 'gold', 2: 'silver', 3: 'bronze' };
+        document.getElementById('lbPrizes').innerHTML = C.prizes.map(function (x) {
+            return '<div class="lb-prize ' + (medals[x.rank] || '') + '"><span class="lb-prize-ico"><span class="fa ' + x.icon + '"></span></span>' +
+                '<span class="lb-prize-info"><small>' + t('Rank') + ' ' + x.rank + '</small><b>' + esc(t(x.name)) + '</b></span>' +
+                '<span class="lb-prize-need">' + t('Score') + '<b>' + x.minScore.toLocaleString('en-US') + '+</b></span></div>';
+        }).join('');
+    })();
+    </script>
 
 </body>
 </html>
