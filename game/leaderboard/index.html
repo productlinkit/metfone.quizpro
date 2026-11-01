@@ -10,8 +10,9 @@
     <link rel="stylesheet" href="../../theme/floating-copy/css/style.css">
     <link rel="stylesheet" href="../../ext/cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta name="csrf-token" content="qgXxqFLNSJc2zlNVlmRugW8P3CaFdQtzTCkWWKoq" />
+    <link rel="stylesheet" href="../../theme/css/game.css?v=red21">
     <link rel="shortcut icon" type="image/x-icon" href="../../theme/images/favicon-quizpro.ico">
-    <link rel="stylesheet" href="../../theme/css/app.css?v=10">
+    <link rel="stylesheet" href="../../theme/css/app.css?v=18">
     <script src="../../theme/js/theme.js?v=1"></script>
     <link rel="stylesheet" href="../../lucky-draw/ld.css?v=red21">
 </head>
@@ -51,14 +52,25 @@
         <span>Leaderboard</span>
     </div>
 
+    <div class="lb-banner">
+        <span class="lb-banner-ill"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M31 19C24 6 10 8 13 15c2 4 11 5 18 4zM33 19C40 6 54 8 51 15c-2 4-11 5-18 4z" fill="#FFCC33" stroke="#D98A00" stroke-width="2.500" stroke-linejoin="round"/><rect x="9" y="28" width="46" height="29" rx="4" fill="#E8362F"/><rect x="6" y="18" width="52" height="13" rx="3.500" fill="#FF5A4F"/><rect x="26" y="18" width="12" height="39" fill="#FFCC33"/><path d="M6 12l1.500 3.500L11 17l-3.500 1.500L6 22l-1.500-3.500L1 17l3.500-1.500zM58 30l1.300 3 3 1.300-3 1.300-1.300 3-1.300-3-3-1.300 3-1.300z" fill="#FFB300"/></svg></span>
+        <div class="lb-banner-copy">
+            <h3 id="lbBannerTitle">Win Amazing Prizes!</h3>
+            <p id="lbBannerSub"></p>
+            <button type="button" class="lb-banner-btn" id="btnPrizes">View Prizes <span class="fa fa-angle-right"></span></button>
+        </div>
+    </div>
+
+    <div class="lb-divider"><svg viewBox="0 0 170 62" aria-hidden="true"><path d="M58 52C44 49 36 37 37 22M112 52c14-3 22-15 21-30" fill="none" stroke="#FFE234" stroke-width="3" stroke-linecap="round"/><path d="M39 26c-7-1-10-6-10-11 6 0 11 4 10 11zM42 38c-8 2-13-1-16-7 6-2 13 0 16 7zM50 47c-8 4-14 2-18-3 5-4 13-4 18 3zM131 26c7-1 10-6 10-11-6 0-11 4-10 11zM128 38c8 2 13-1 16-7-6-2-13 0-16 7zM120 47c8 4 14 2 18-3-5-4-13-4-18 3z" fill="#FFE234"/><path d="M68 10H56c0 15 6 21 15 22M102 10h12c0 15-6 21-15 22" fill="none" stroke="#FFC61A" stroke-width="4"/><path d="M66 6h38v16c0 12-8 19-19 19S66 34 66 22z" fill="#FFD23F" stroke="#D98A00" stroke-width="2"/><rect x="80" y="40" width="10" height="9" fill="#FFC61A"/><rect x="70" y="48" width="30" height="8" rx="2" fill="#D98A00"/><path d="M85 12l2.700 5.500 6 .9-4.300 4.200 1 6-5.400-2.800-5.400 2.800 1-6-4.300-4.200 6-.9z" fill="#fff"/></svg></div>
+
     <div class="lb-podium" id="lbPodium"></div>
 
-    <div class="card-simple-outer">
+    <div class="lb-table" id="lbTable">
+        <div class="lb-table-head"><span>#</span><span>Player</span><span>Score</span></div>
         <ul class="lb-list" id="lbList"></ul>
     </div>
 
-    <h3 class="lb-section-title"><span class="fa fa-gift"></span> Prizes</h3>
-    <div class="lb-prizes" id="lbPrizes"></div>
+    <div class="lb-me" id="lbMe"></div>
                   
             
         </div>
@@ -139,45 +151,45 @@
         </div>
     </div>
     
+    <div class="res-confetti" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
+    <div class="offcanvas offcanvas-bottom avatar-sheet" tabindex="-1" id="lbSheet" aria-labelledby="lbSheetTitle">
+        <div class="avatar-sheet-head">
+            <h3 class="avatar-sheet-title" id="lbSheetTitle">Prizes</h3>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <p class="lb-sheet-sub">Finish in the top 3 when the season ends to win.</p>
+        <div class="lb-prizes" id="lbPrizes"></div>
+        <a href="../../lucky-draw/index.html" class="lb-entries">
+            <img src="../../lucky-draw/img/ticket.png" alt="">
+            <span><b>More entries, more chances</b><small>Every quiz earns Lucky Draw tickets</small></span>
+            <span class="fa fa-angle-right"></span>
+        </a>
+    </div>
+
+    <div class="modal fade" tabindex="-1" id="lbChamp" aria-labelledby="lbChampTitle">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content lb-champ">
+                <h3 class="lb-champ-title" id="lbChampTitle">Season Champion</h3>
+                <span class="lb-champ-crown qf-icon-crown"></span>
+                <span class="lb-champ-ava" id="lbChampAva"></span>
+                <div class="lb-champ-name" id="lbChampName"></div>
+                <div class="lb-champ-score" id="lbChampScore"></div>
+                <div class="lb-champ-prize" id="lbChampPrize"></div>
+                <button type="button" class="btn btn-lg button-primary w-100" data-bs-dismiss="modal">See Leaderboard</button>
+            </div>
+        </div>
+    </div>
+
     <script src="../../ext/code.jquery.com/jquery-3.6.1.min.js"></script>
     <script src="../../theme/js/session.js?v=4"></script>
-    <script src="../../theme/js/i18n.js?v=5"></script>
+    <script src="../../theme/js/questions.js?v=1"></script>
+    <script src="../../theme/js/game-demo.js?v=8"></script>
+    <script src="../../theme/js/i18n.js?v=9"></script>
     <script src="../../theme/js/bootstrap.bundle.min.js"></script>
 
     <script src="../../theme/js/custom.js?v=3"></script>
-    <script src="../../theme/js/leaderboard-config.js?v=2"></script>
-    <script>
-    (function () {
-        var S = window.QP_SESSION, C = window.QP_LEADERBOARD, t = QP_I18N.t;
-        function esc(x) { return $('<div>').text(x).html(); }
-        function ava(p) {
-            if (p.me) return '<img src="' + S.avatar() + '" data-user-avatar alt="">';
-            if (p.avatar) return '<img src="' + S.root + p.avatar + '" alt="">';
-            return '<span class="opp-initial" style="background-color:' + p.color + '">' + esc(p.name.charAt(0)) + '</span>';
-        }
-        var u = S.user || {}, players = C.players.map(function (p) {
-            return p.me ? Object.assign({}, p, { name: u.name || u.msisdn || t('You') }) : p;
-        }).sort(function (a, b) { return b.score - a.score; });
-        function row(p, i) {
-            return '<li class="lb-row' + (p.me ? ' is-me' : '') + '"><span class="lb-rank">' + (i + 4) + '</span><span class="lb-ava">' + ava(p) + '</span>' +
-                '<span class="lb-name">' + esc(p.name) + '</span><span class="lb-score">' + p.score.toLocaleString('en-US') + '</span></li>';
-        }
-        // Podium: 2nd, 1st, 3rd
-        document.getElementById('lbPodium').innerHTML = [[1, 'silver'], [0, 'gold'], [2, 'bronze']].map(function (x) {
-            var p = players[x[0]];
-            return '<div class="lb-step ' + x[1] + (p.me ? ' is-me' : '') + '">' + (x[0] === 0 ? '<span class="lb-crown qf-icon-crown"></span>' : '') +
-                '<span class="lb-step-ava">' + ava(p) + '<b>' + (x[0] + 1) + '</b></span><span class="lb-step-name">' + esc(p.name) + '</span>' +
-                '<span class="lb-step-score">' + p.score.toLocaleString('en-US') + '</span><span class="lb-step-base"></span></div>';
-        }).join('');
-        document.getElementById('lbList').innerHTML = players.slice(3).map(row).join('');
-        var medals = { 1: 'gold', 2: 'silver', 3: 'bronze' };
-        document.getElementById('lbPrizes').innerHTML = C.prizes.map(function (x) {
-            return '<div class="lb-prize ' + (medals[x.rank] || '') + '"><span class="lb-prize-ico"><span class="fa ' + x.icon + '"></span></span>' +
-                '<span class="lb-prize-info"><small>' + t('Rank') + ' ' + x.rank + '</small><b>' + esc(t(x.name)) + '</b></span>' +
-                '<span class="lb-prize-need">' + t('Score') + '<b>' + x.minScore.toLocaleString('en-US') + '+</b></span></div>';
-        }).join('');
-    })();
-    </script>
-
+    <script src="../../theme/js/leaderboard-config.js?v=4"></script>
+    <script src="../../theme/js/leaderboard.js?v=3"></script>
 </body>
 </html>

@@ -104,43 +104,120 @@ html[data-theme="dark"] .res-review-item small b.is-correct{color:#5EE08F}
 
 /* ---------- Leaderboard ---------- */
 .opp-initial{display:flex;align-items:center;justify-content:center;width:100%;height:100%;border-radius:50%;color:#fff;font-weight:bold;font-size:1.25em}
-.lb-podium{display:grid;grid-template-columns:1fr 1.15fr 1fr;align-items:end;gap:8px;margin:28px 0 16px}
-.lb-step{--medal:#B8C0CC;position:relative;display:flex;flex-direction:column;align-items:center;min-width:0;text-align:center;color:#fff}
-.lb-step.gold{--medal:#F5B93B}
-.lb-step.bronze{--medal:#CD7F45}
-.lb-crown{position:absolute;top:-24px;color:#F5B93B;font-size:1.5rem}
-.lb-crown::before{margin:0}
-.lb-step-ava{position:relative;display:block;width:68px;height:68px;border-radius:50%;border:4px solid var(--medal);background:#DFDFDF;margin-bottom:12px}
-.gold .lb-step-ava{width:84px;height:84px}
-.lb-step-ava img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}
-.lb-step-ava b{position:absolute;left:50%;bottom:-12px;transform:translateX(-50%);width:24px;height:24px;border-radius:50%;background:var(--medal);color:#fff;font-size:0.875rem;line-height:24px;border:2px solid #fff;box-sizing:content-box}
-.lb-step-name{font-weight:bold;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.lb-step-score{font-size:0.9375rem;margin-bottom:6px}
-.lb-step-base{display:block;width:100%;height:40px;border-radius:14px 14px 0 0;background:var(--medal);box-shadow:0 5px 10px rgba(0,0,0,0.12)}
-.gold .lb-step-base{height:68px}
-.bronze .lb-step-base{height:28px}
+.lb-crown-ico{display:inline-block;color:#B45309;margin-right:8px}
+.lb-crown-ico::before{margin:0;width:auto}
+
+.lb-banner{margin-top:12px;display:flex;align-items:center;gap:12px;background:#fff;border-radius:24px;padding:12px;box-shadow:0 5px 10px rgba(0,0,0,0.12)}
+.lb-banner-ill{width:84px;height:84px;flex-shrink:0;padding:10px;border-radius:18px;background:#FFF1DC}
+.lb-banner-ill svg{display:block;width:100%;height:100%}
+.lb-banner-copy{flex:1;min-width:0}
+.lb-banner h3{margin:0 0 2px;font-size:1.125rem;font-weight:bold;color:#2F2F2F}
+.lb-banner p{margin:0 0 8px;font-size:0.8125rem;line-height:1.3;color:#5A5A5A}
+.lb-banner-btn{border:0;border-radius:50rem;padding:6px 14px;background:#FFEFEF;color:#A51419;font-weight:bold;font-size:0.875rem}
+.lb-divider{display:flex;align-items:center;gap:8px;margin:14px 0 2px}
+.lb-divider::before,.lb-divider::after{content:'';flex:1;height:2px;background:rgba(255,255,255,0.6)}
+.lb-divider svg{display:block;width:120px;height:44px}
+
+.lb-podium{display:grid;grid-template-columns:1fr 1.12fr 1fr;align-items:end;gap:6px;margin-top:4px;padding:0 2px}
+.lb-step{--p1:#D5DBE5;--p2:#A9B3C2;--medal:#E4E9F0;position:relative;display:flex;flex-direction:column;align-items:center;min-width:0;text-align:center}
+.lb-step.gold{--p1:#FFD765;--p2:#F3AE2B;--medal:#FFE48F}
+.lb-step.bronze{--p1:#E9B58B;--p2:#C98454;--medal:#F2CBA9}
+.lb-step-crown{position:relative;z-index:3;color:#FFE234;font-size:1.75rem;line-height:1;margin-bottom:-10px}
+.lb-step-crown::before{margin:0}
+.lb-step-ava{position:relative;z-index:2;display:block;width:76px;height:76px;margin-bottom:-14px;border-radius:50%;border:4px solid var(--medal);background:#fff;overflow:hidden;box-shadow:0 4px 10px rgba(0,0,0,0.2)}
+.gold .lb-step-ava{width:94px;height:94px;box-shadow:0 0 0 6px rgba(255,226,52,0.35),0 4px 10px rgba(0,0,0,0.2)}
+.lb-step-ava img{width:100%;height:100%;object-fit:cover;display:block}
+.lb-open{display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:2rem;font-weight:bold;color:#6B6B6B;background:#F1F1F1}
+.lb-pillar{position:relative;width:100%;min-height:104px;padding:26px 4px 12px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:1px;border-radius:14px 14px 0 0;background:linear-gradient(180deg,var(--p1) 0%,var(--p2) 100%);color:#241A00}
+.gold .lb-pillar{min-height:134px}
+.bronze .lb-pillar{min-height:92px}
+.lb-medal{position:absolute;z-index:3;top:-13px;left:50%;transform:translateX(-50%);width:28px;height:28px;border-radius:50%;background:var(--medal);border:2px solid #fff;color:#241A00;font-size:0.875rem;line-height:24px;box-shadow:0 2px 4px rgba(0,0,0,0.2)}
+.lb-step-name{max-width:100%;font-weight:bold;font-size:0.9375rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lb-step-score{font-weight:bold;font-size:1.125rem;white-space:nowrap}
+.lb-pillar .lb-crown-ico{color:#241A00}
+.lb-step-prize{margin-top:4px;max-width:100%;padding:2px 8px;border-radius:10px;background:#241A00;color:#fff;font-size:0.6875rem;font-weight:bold;line-height:1.25}
+.lb-step.is-open .lb-pillar{opacity:1}
+
+.lb-table{background:#fff;border-radius:0 0 24px 24px;box-shadow:0 5px 10px rgba(0,0,0,0.12);padding:6px 4px 8px}
+.lb-table[hidden]{display:none}
+.lb-table-head{display:grid;grid-template-columns:36px 1fr auto;gap:12px;padding:8px 16px;font-size:0.8125rem;font-weight:bold;color:#6B6B6B;border-bottom:1px solid rgba(150,150,150,0.25)}
 .lb-list{list-style:none;margin:0;padding:0}
-.lb-row{display:flex;align-items:center;gap:12px;padding:12px 16px}
-.lb-row+.lb-row{border-top:1px solid rgba(150,150,150,0.25)}
+.lb-row{display:flex;align-items:center;gap:12px;padding:8px 16px}
+.lb-row+.lb-row{border-top:1px solid rgba(150,150,150,0.2)}
 .lb-row.is-me{background:#FFEFEF;border-radius:16px}
-.lb-rank{width:24px;flex-shrink:0;text-align:center;font-weight:bold;color:#6B6B6B}
-.lb-ava{width:44px;height:44px;flex-shrink:0;border-radius:50%;background:#DFDFDF;overflow:hidden}
+.lb-rank{width:24px;flex-shrink:0;text-align:center;font-weight:bold;color:#2F2F2F}
+.lb-ava{width:40px;height:40px;flex-shrink:0;border-radius:50%;background:#DFDFDF;overflow:hidden}
 .lb-ava img{width:100%;height:100%;object-fit:cover;display:block}
 .lb-name{flex:1;min-width:0;font-weight:bold;color:#2F2F2F;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.lb-score{flex-shrink:0;font-weight:bold;color:#E31C23}
-.lb-section-title{color:#fff;font-size:1.25rem;font-weight:bold;margin:24px 0 12px}
-.lb-section-title .fa{margin-right:4px}
-.lb-prizes{display:grid;gap:10px;margin-bottom:16px}
-.lb-prize{--medal:#E31C23;display:flex;align-items:center;gap:12px;background:#fff;border-radius:24px;padding:12px 16px;box-shadow:0 5px 10px rgba(0,0,0,0.08)}
-.lb-prize.gold{--medal:#F5B93B}
-.lb-prize.silver{--medal:#9AA3B0}
-.lb-prize.bronze{--medal:#CD7F45}
-.lb-prize-ico{width:48px;height:48px;flex-shrink:0;border-radius:50%;background:var(--medal);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.5rem}
-.lb-prize-info{flex:1;min-width:0;line-height:1.25}
-.lb-prize-info small{display:block;color:#6B6B6B;font-weight:bold}
-.lb-prize-info b{display:block;color:#2F2F2F;font-size:1.0625rem}
-.lb-prize-need{flex-shrink:0;text-align:right;font-size:0.75rem;color:#6B6B6B;line-height:1.25}
-.lb-prize-need b{display:block;font-size:1rem;color:#E31C23}
+.lb-score{flex-shrink:0;font-weight:bold;color:#2F2F2F}
+
+.lb-me{margin:12px 0 16px;background:#fff;border-radius:24px;padding:14px 16px;box-shadow:0 5px 10px rgba(0,0,0,0.12)}
+.lb-me .btn{font-weight:bold;margin-top:12px}
+.lb-me-top{display:flex;align-items:center;gap:12px}
+.lb-me-score{flex:1;min-width:0;line-height:1.15}
+.lb-me-score small,.lb-me-rank small{display:block;color:#6B6B6B;font-weight:bold;font-size:0.8125rem}
+.lb-me-score b{font-size:1.5rem;color:#C4161C}
+.lb-me-rank{flex-shrink:0;text-align:right;line-height:1.15}
+.lb-me-rank b{font-size:1.5rem;color:#2F2F2F}
+.lb-me-next{margin:10px 0 0;color:#2F2F2F;font-size:0.9375rem}
+.lb-note{display:flex;align-items:center;gap:12px;color:#2F2F2F}
+.lb-note b{font-size:1.0625rem}
+.lb-note p{margin:2px 0 0;font-size:0.875rem;color:#5A5A5A}
+.lb-note p b{font-size:inherit;color:#2F2F2F}
+.lb-note-ico{width:48px;height:48px;flex-shrink:0;border-radius:50%;background:#FFF1DC;color:#B45309;display:flex !important;align-items:center;justify-content:center;font-size:1.5rem}
+
+.lb-sheet-sub{margin:-8px 0 12px;font-size:0.875rem;color:#5A5A5A}
+.lb-prizes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:12px}
+.lb-prize{--medal:#F5B93B;display:flex;flex-direction:column;align-items:center;gap:8px;min-width:0;background:#fff;border:1px solid #EFE7E7;border-radius:20px;padding:10px 8px;text-align:center}
+.lb-prize.r2{--medal:#B8C0CC}
+.lb-prize.r3{--medal:#CD7F45}
+.lb-prize-ico{position:relative;display:flex;align-items:center;justify-content:center;width:100%;aspect-ratio:1;border-radius:14px;background:#FFF5E5;border:3px solid var(--medal);color:#2F2F2F;font-size:2.25rem}
+.lb-prize-ico img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:4px;border-radius:10px;background:#fff}
+.lb-prize-ico b{position:absolute;z-index:1;left:-6px;top:-6px;width:24px;height:24px;border-radius:50%;background:var(--medal);color:#1F1F1F;font-size:0.8125rem;line-height:24px;text-align:center;box-shadow:0 0 0 2px #fff}
+.lb-prize-info{flex:1;width:100%;line-height:1.2}
+.lb-prize-info b{display:flex;align-items:center;justify-content:center;min-height:2.4em;color:#2F2F2F;font-size:0.9375rem}
+.lb-prize-info small{display:block;color:#6B6B6B;font-weight:bold;font-size:0.75rem;margin-top:2px}
+.lb-prize-state{display:inline-flex;align-items:center;justify-content:center;gap:4px;width:100%;min-width:0;border-radius:50rem;padding:4px 6px;font-size:0.75rem;font-weight:bold;background:#EFEFEF;color:#5A5A5A;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lb-prize-state.is-won{background:#1E8449;color:#fff}
+.lb-entries{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:18px;background:#FFF5F5;color:#2F2F2F;text-decoration:none}
+.lb-entries:hover,.lb-entries:focus{color:#2F2F2F}
+.lb-entries img{width:40px;height:40px;object-fit:contain;flex-shrink:0}
+.lb-entries span:nth-child(2){flex:1;min-width:0;line-height:1.25}
+.lb-entries b{display:block}
+.lb-entries small{display:block;color:#5A5A5A}
+.lb-entries .fa{font-size:1.5rem;color:#A51419}
+
+.lb-ended .res-confetti{z-index:1060}
+.modal-content.lb-champ{align-items:center;text-align:center;padding:24px 20px 20px;border:0;border-radius:24px}
+.lb-champ-title{margin:0 0 6px;font-size:1.375rem;font-weight:bold;color:#A51419}
+.lb-champ-crown{color:#B45309;font-size:2rem;line-height:1;margin-bottom:-8px;position:relative;z-index:1}
+.lb-champ-crown::before{margin:0}
+.lb-champ-ava{display:block;width:112px;height:112px;border-radius:50%;border:5px solid #F5B93B;overflow:hidden;box-shadow:0 0 0 7px rgba(245,185,59,0.25)}
+.lb-champ-ava img{width:100%;height:100%;object-fit:cover;display:block}
+.lb-champ-name{margin-top:12px;font-size:1.375rem;font-weight:bold;color:#2F2F2F}
+.lb-champ-score{font-weight:bold;font-size:1.125rem;color:#2F2F2F;margin-bottom:12px}
+.lb-champ-prize{display:flex;align-items:center;gap:12px;width:100%;margin-bottom:16px;padding:10px;border-radius:18px;background:#FFF5E5;text-align:left}
+.lb-champ-prize .lb-prize-ico{width:60px;flex-shrink:0;--medal:#F5B93B}
+.lb-champ-prize small{display:block;font-weight:bold;color:#5A5A5A}
+.lb-champ-prize b{font-size:1.125rem;color:#2F2F2F}
+.lb-champ .btn{font-weight:bold}
+
+html[data-theme="dark"] .lb-banner,html[data-theme="dark"] .lb-table,html[data-theme="dark"] .lb-me,html[data-theme="dark"] .lb-prize{background:#24242C;border-color:#3A3A44}
+html[data-theme="dark"] .lb-banner h3,html[data-theme="dark"] .lb-rank,html[data-theme="dark"] .lb-score,html[data-theme="dark"] .lb-me-rank b,html[data-theme="dark"] .lb-me-next,html[data-theme="dark"] .lb-note,html[data-theme="dark"] .lb-note p b,html[data-theme="dark"] .lb-entries,html[data-theme="dark"] .lb-champ-name,html[data-theme="dark"] .lb-champ-score,html[data-theme="dark"] .lb-champ-prize b{color:#F1F1F4}
+html[data-theme="dark"] .lb-banner p,html[data-theme="dark"] .lb-note p,html[data-theme="dark"] .lb-sheet-sub,html[data-theme="dark"] .lb-table-head,html[data-theme="dark"] .lb-me-score small,html[data-theme="dark"] .lb-me-rank small,html[data-theme="dark"] .lb-prize-info small,html[data-theme="dark"] .lb-entries small,html[data-theme="dark"] .lb-champ-prize small{color:#B5B5BD}
+html[data-theme="dark"] .lb-banner-ill,html[data-theme="dark"] .lb-prize-ico{background:#fff;color:#2F2F2F}
+html[data-theme="dark"] .lb-banner-btn{background:#3A2326;color:#FF8A8F}
+html[data-theme="dark"] .lb-me-score b{color:#FF8A8F}
+html[data-theme="dark"] .lb-prize-state:not(.is-won){background:#3A3A44;color:#E0E0E6}
+html[data-theme="dark"] .lb-entries{background:#3A2326}
+html[data-theme="dark"] .lb-entries .fa{color:#FF8A8F}
+html[data-theme="dark"] .lb-note-ico{background:#3A2326;color:#FFCC5F}
+html[data-theme="dark"] .lb-champ-title{color:#FF8A8F}
+html[data-theme="dark"] .lb-champ-prize{background:#2E2E37}
+html[data-theme="dark"] .lb-table .lb-crown-ico,html[data-theme="dark"] .lb-champ .lb-crown-ico{color:#FFCC5F}
+html[data-theme="light"] html[data-theme="light"] html[data-theme="light"] html[data-theme="light"] .lb-divider::before,html[data-theme="light"] .lb-divider::after{background:#E8C9C9}
+html[data-theme="light"] .lb-step-crown{color:#A16207}
+html[data-theme="light"] .lb-banner,html[data-theme="light"] .lb-table,html[data-theme="light"] .lb-me{box-shadow:0 2px 10px rgba(0,0,0,0.08)}
 
 /* ---------- Theme: Light ---------- */
 html[data-theme="light"] body{background-color:#F7F4F4}
@@ -160,9 +237,6 @@ html[data-theme="light"] .res-ann,
 html[data-theme="light"] .res-answered,
 html[data-theme="light"] .res-btn-ghost,
 html[data-theme="light"] .text-white,
-html[data-theme="light"] .lb-section-title,
-html[data-theme="light"] .lb-step-name,
-html[data-theme="light"] .lb-step-score,
 html[data-theme="light"] .modal-level-title,
 html[data-theme="light"] .modal-level-header{color:#2F2F2F !important}
 html[data-theme="light"] .logo{background:#E31C23;border-radius:50rem;padding:4px 12px;width:auto;height:auto;display:inline-block}
@@ -350,15 +424,14 @@ html .ld-prize-tag{background:#fff;color:#A51419}
 html[data-theme="light"] .lang-current-label,html[data-theme="light"] .contact-hero-sub{color:#2F2F2F}
 .is-lose .res-ribbon{background:#6B6B6B}
 .is-lose .res-ribbon::before,.is-lose .res-ribbon::after{background:#4A4A4A}
-.res-crown,.lb-crown{color:#FFE234}
-html[data-theme="light"] .res-crown,html[data-theme="light"] .lb-crown{color:#A16207}
+.res-crown{color:#FFE234}
+html[data-theme="light"] .res-crown{color:#A16207}
 .hist-chips button:not(.active){color:#A51419}
 
 .button-grey{background-color:#6B6B6B}
 .button-grey:hover,.button-grey:focus{background-color:#5A5A5A}
 
 /* medals carry dark text */
-.lb-step-ava b,.lb-prize-ico{color:#1F1F1F}
 
 /* buttons on the red page */
 .res-actions .button-primary,.res-actions .button-primary:hover,.res-actions .button-primary:focus{background:#fff;color:#C4161C}
@@ -386,7 +459,6 @@ html[data-theme="dark"] .ld-stat-big b,html[data-theme="dark"] .ld-rule b{color:
 html[data-theme="dark"] .ld-tabs{background:#3A3A44}
 html[data-theme="dark"] .ld-plus.zero{background:#3A3A44;color:#D0D0D6}
 html[data-theme="dark"] .ld-entry:not(.ld-entry-home) .ld-entry-title,
-html[data-theme="dark"] .lb-prize-need b,
 html[data-theme="dark"] .hist-chips button:not(.active){color:#FF8A8F}
-html[data-theme="dark"] .lb-rank,html[data-theme="dark"] .lb-prize-info small,html[data-theme="dark"] .lb-prize-need{color:#B5B5BD}
+html[data-theme="dark"] .lb-rank{color:#B5B5BD}
 html[data-theme="dark"] .play-btn:disabled:not(.right):not(.wrong){color:#B5B5BD;border-color:#55555F}

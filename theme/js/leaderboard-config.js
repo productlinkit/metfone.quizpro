@@ -1,22 +1,22 @@
 /*
  * Leaderboard placeholder data: edit players and prizes here.
  * players: avatar = image path, or color = initial on a colored circle; me = the current user
- * prizes: icon = Font Awesome icon, minScore = score needed to win
+ * prizes: by final rank when the season ends; image = photo, or icon = Font Awesome icon
  */
 window.QP_LEADERBOARD = {
     players: [
-        { name: '9876543210', score: 27340, avatar: 'uploads/user/1/ava-eissa.png' },
-        { name: 'Dara', score: 25480, color: '#C4161C' },
+        { name: 'Eissa', score: 27340, avatar: 'uploads/user/1/ava-eissa.png' },
+        { name: 'Dara', score: 25480, avatar: 'theme/images/avatars/5.svg' },
         { me: true, score: 22250 },
-        { name: 'Sokha', score: 19820, color: '#8A1015' },
-        { name: 'Hella', score: 16540, color: '#B83A5E' },
-        { name: 'Vibol', score: 12130, color: '#5E5E5E' },
-        { name: 'Sophea', score: 8760, color: '#A51419' },
-        { name: 'Ratha', score: 5230, color: '#7A7A7A' }
+        { name: 'Sokha', score: 19820, avatar: 'theme/images/avatars/2.svg' },
+        { name: 'Hella', score: 16540, avatar: 'theme/images/avatars/3.svg' },
+        { name: 'Vibol', score: 12130, avatar: 'theme/images/avatars/6.svg' },
+        { name: 'Sophea', score: 8760, avatar: 'theme/images/avatars/8.svg' },
+        { name: 'Ratha', score: 5230, avatar: 'theme/images/avatars/7.svg' }
     ],
     prizes: [
-        { rank: 1, name: 'Smartphone', icon: 'fa-mobile', minScore: 25000 },
-        { rank: 2, name: 'Wireless Earbuds', icon: 'fa-headphones', minScore: 20000 },
-        { rank: 3, name: '10GB Data', icon: 'fa-wifi', minScore: 15000 }
+        { rank: 1, name: 'Smartphone', image: 'lucky-draw/img/prize-phone.jpg' },
+        { rank: 2, name: 'Wireless Earbuds', image: 'lucky-draw/img/prize-earbuds.jpg' },
+        { rank: 3, name: '10GB Data', icon: 'fa-wifi' }
     ]
 };
