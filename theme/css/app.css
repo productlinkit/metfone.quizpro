@@ -53,7 +53,10 @@ html .ld-entry-home .ld-entry-go{background:rgba(255,255,255,.22);color:#fff}
 html:not([data-theme="dark"]) .quiz-box.is-soon .quiz-box-title,html:not([data-theme="dark"]) .quiz-list a.is-soon .quiz-list-info-title{color:#6B6B6B}
 html[data-theme="dark"] .quiz-box.is-soon .quiz-box-title,html[data-theme="dark"] .quiz-list a.is-soon .quiz-list-info-title{color:#A8A8B0}
 .soon-badge{display:inline-block;background:#5E5E5E;color:#fff;font-size:0.625rem;font-weight:bold;line-height:1.3;border-radius:50rem;padding:2px 7px;white-space:nowrap}
-.quiz-box .soon-badge{position:absolute;top:0;left:50%;transform:translateX(-50%)}
+.quiz-box .soon-badge{display:block;margin-top:2px;padding:0;background:none;color:#6B6B6B;font-size:0.625rem;text-align:center}
+.quiz-box.is-soon::after{content:"\f017";position:absolute;top:4px;right:4px;width:20px;height:20px;border-radius:50%;background:#5E5E5E;color:#fff;font:normal 12px/20px FontAwesome;text-align:center}
+html[data-theme="dark"] .quiz-box .soon-badge{color:#A8A8B0}
+@media (max-width:359px){.quiz-box-title{font-size:0.8125rem}.quiz-box .soon-badge{max-width:44px;margin:2px auto 0;line-height:1.15;white-space:normal}}
 .quiz-list a.is-soon{position:relative}
 .quiz-list a.is-soon .soon-badge{position:absolute;top:0;right:0}
 .qp-toast{background:#2F2F2F;white-space:nowrap}
@@ -138,7 +141,7 @@ html[data-theme="dark"] .res-review-item small b.is-correct{color:#5EE08F}
 .lb-step-prize{margin-top:4px;max-width:100%;padding:2px 8px;border-radius:10px;background:#241A00;color:#fff;font-size:0.6875rem;font-weight:bold;line-height:1.25}
 .lb-step.is-open .lb-pillar{opacity:1}
 
-.lb-table{background:#fff;border-radius:0 0 24px 24px;box-shadow:0 5px 10px rgba(0,0,0,0.12);padding:6px 4px 8px}
+.lb-table{margin-bottom:16px;background:#fff;border-radius:0 0 24px 24px;box-shadow:0 5px 10px rgba(0,0,0,0.12);padding:6px 4px 8px}
 .lb-table[hidden]{display:none}
 .lb-table-head{display:grid;grid-template-columns:36px 1fr auto;gap:12px;padding:8px 16px;font-size:0.8125rem;font-weight:bold;color:#6B6B6B;border-bottom:1px solid rgba(150,150,150,0.25)}
 .lb-list{list-style:none;margin:0;padding:0}
@@ -151,15 +154,33 @@ html[data-theme="dark"] .res-review-item small b.is-correct{color:#5EE08F}
 .lb-name{flex:1;min-width:0;font-weight:bold;color:#2F2F2F;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .lb-score{flex-shrink:0;font-weight:bold;color:#2F2F2F}
 
+.lb-search{display:flex;align-items:center;gap:10px;margin-top:12px;padding:6px 6px 6px 16px;border-radius:50rem;background:#fff;color:#6B6B6B;box-shadow:0 5px 10px rgba(0,0,0,0.12)}
+.lb-search[hidden],.lb-search-card[hidden],#lbMain[hidden]{display:none}
+.lb-search input{flex:1;min-width:0;height:36px;border:0;background:none;outline:none;color:#2F2F2F;font-size:1rem}
+.lb-search input::-webkit-search-cancel-button{display:none}
+.lb-search input::placeholder{color:#6B6B6B}
+.lb-search button{width:36px;height:36px;flex-shrink:0;border:0;border-radius:50%;background:#FFEFEF;color:#A51419}
+.lb-search-card{margin-top:12px;margin-bottom:16px;padding:6px 4px;border-radius:24px;background:#fff;box-shadow:0 5px 10px rgba(0,0,0,0.12)}
+.lb-search-results{list-style:none;margin:0;padding:0}
+.lb-search-results .lb-row{width:100%;border:0;background:none;text-align:left;border-radius:16px}
+.lb-search-results .lb-row.is-me{background:#FFEFEF}
+.lb-search-results li+li{border-top:1px solid rgba(150,150,150,0.2)}
+.lb-search-empty{padding:24px 0;text-align:center;font-weight:bold;color:#5A5A5A}
+.lb-flash{animation:lbFlash 1.6s ease-out}
+@keyframes lbFlash{0%,50%{box-shadow:0 0 0 4px #FFE234;border-radius:16px}100%{box-shadow:0 0 0 4px rgba(255,226,52,0);border-radius:16px}}
+@media (prefers-reduced-motion:reduce){.lb-flash{animation:none;outline:4px solid #FFE234}}
+html[data-theme="dark"] .lb-search-results .lb-row.is-me{background:#3A2326}
+html[data-theme="dark"] .lb-search,html[data-theme="dark"] .lb-search-card{background:#24242C;color:#B5B5BD}
+html[data-theme="dark"] .lb-search input{color:#F1F1F4}
+html[data-theme="dark"] .lb-search input::placeholder{color:#B5B5BD}
+html[data-theme="dark"] .lb-search button{background:#3A2326;color:#FF8A8F}
+html[data-theme="dark"] .lb-search-empty{color:#B5B5BD}
+html[data-theme="dark"] .lb-search-results .lb-crown-ico{color:#FFCC5F}
+html[data-theme="light"] .lb-flash{animation-name:lbFlashLight}
+@keyframes lbFlashLight{0%,50%{box-shadow:0 0 0 4px #E31C23;border-radius:16px}100%{box-shadow:0 0 0 4px rgba(227,28,35,0);border-radius:16px}}
+.lb-me[hidden]{display:none}
 .lb-me{margin:12px 0 16px;background:#fff;border-radius:24px;padding:14px 16px;box-shadow:0 5px 10px rgba(0,0,0,0.12)}
 .lb-me .btn{font-weight:bold;margin-top:12px}
-.lb-me-top{display:flex;align-items:center;gap:12px}
-.lb-me-score{flex:1;min-width:0;line-height:1.15}
-.lb-me-score small,.lb-me-rank small{display:block;color:#6B6B6B;font-weight:bold;font-size:0.8125rem}
-.lb-me-score b{font-size:1.5rem;color:#C4161C}
-.lb-me-rank{flex-shrink:0;text-align:right;line-height:1.15}
-.lb-me-rank b{font-size:1.5rem;color:#2F2F2F}
-.lb-me-next{margin:10px 0 0;color:#2F2F2F;font-size:0.9375rem}
 .lb-note{display:flex;align-items:center;gap:12px;color:#2F2F2F}
 .lb-note b{font-size:1.0625rem}
 .lb-note p{margin:2px 0 0;font-size:0.875rem;color:#5A5A5A}
@@ -203,11 +224,10 @@ html[data-theme="dark"] .res-review-item small b.is-correct{color:#5EE08F}
 .lb-champ .btn{font-weight:bold}
 
 html[data-theme="dark"] .lb-banner,html[data-theme="dark"] .lb-table,html[data-theme="dark"] .lb-me,html[data-theme="dark"] .lb-prize{background:#24242C;border-color:#3A3A44}
-html[data-theme="dark"] .lb-banner h3,html[data-theme="dark"] .lb-rank,html[data-theme="dark"] .lb-score,html[data-theme="dark"] .lb-me-rank b,html[data-theme="dark"] .lb-me-next,html[data-theme="dark"] .lb-note,html[data-theme="dark"] .lb-note p b,html[data-theme="dark"] .lb-entries,html[data-theme="dark"] .lb-champ-name,html[data-theme="dark"] .lb-champ-score,html[data-theme="dark"] .lb-champ-prize b{color:#F1F1F4}
-html[data-theme="dark"] .lb-banner p,html[data-theme="dark"] .lb-note p,html[data-theme="dark"] .lb-sheet-sub,html[data-theme="dark"] .lb-table-head,html[data-theme="dark"] .lb-me-score small,html[data-theme="dark"] .lb-me-rank small,html[data-theme="dark"] .lb-prize-info small,html[data-theme="dark"] .lb-entries small,html[data-theme="dark"] .lb-champ-prize small{color:#B5B5BD}
+html[data-theme="dark"] .lb-banner h3,html[data-theme="dark"] .lb-rank,html[data-theme="dark"] .lb-score,html[data-theme="dark"] .lb-note,html[data-theme="dark"] .lb-note p b,html[data-theme="dark"] .lb-entries,html[data-theme="dark"] .lb-champ-name,html[data-theme="dark"] .lb-champ-score,html[data-theme="dark"] .lb-champ-prize b{color:#F1F1F4}
+html[data-theme="dark"] .lb-banner p,html[data-theme="dark"] .lb-note p,html[data-theme="dark"] .lb-sheet-sub,html[data-theme="dark"] .lb-table-head,html[data-theme="dark"] .lb-prize-info small,html[data-theme="dark"] .lb-entries small,html[data-theme="dark"] .lb-champ-prize small{color:#B5B5BD}
 html[data-theme="dark"] .lb-banner-ill,html[data-theme="dark"] .lb-prize-ico{background:#fff;color:#2F2F2F}
 html[data-theme="dark"] .lb-banner-btn{background:#3A2326;color:#FF8A8F}
-html[data-theme="dark"] .lb-me-score b{color:#FF8A8F}
 html[data-theme="dark"] .lb-prize-state:not(.is-won){background:#3A3A44;color:#E0E0E6}
 html[data-theme="dark"] .lb-entries{background:#3A2326}
 html[data-theme="dark"] .lb-entries .fa{color:#FF8A8F}

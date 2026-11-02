@@ -12,7 +12,7 @@
     <meta name="csrf-token" content="qgXxqFLNSJc2zlNVlmRugW8P3CaFdQtzTCkWWKoq" />
     <link rel="stylesheet" href="../../theme/css/game.css?v=red21">
     <link rel="shortcut icon" type="image/x-icon" href="../../theme/images/favicon-quizpro.ico">
-    <link rel="stylesheet" href="../../theme/css/app.css?v=18">
+    <link rel="stylesheet" href="../../theme/css/app.css?v=26">
     <script src="../../theme/js/theme.js?v=1"></script>
     <link rel="stylesheet" href="../../lucky-draw/ld.css?v=red21">
 </head>
@@ -52,6 +52,17 @@
         <span>Leaderboard</span>
     </div>
 
+    <div class="lb-search" id="lbSearch" hidden>
+        <span class="fa fa-search" aria-hidden="true"></span>
+        <input type="search" id="lbSearchBox" placeholder="Search player..." aria-label="Search player..." aria-controls="lbSearchResults" autocomplete="off">
+        <button type="button" id="lbSearchClose" aria-label="Close"><span class="fa fa-times"></span></button>
+    </div>
+
+    <div class="lb-search-card" id="lbSearchCard" hidden>
+        <ul class="lb-search-results" id="lbSearchResults" aria-live="polite"></ul>
+    </div>
+
+    <div id="lbMain">
     <div class="lb-banner">
         <span class="lb-banner-ill"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M31 19C24 6 10 8 13 15c2 4 11 5 18 4zM33 19C40 6 54 8 51 15c-2 4-11 5-18 4z" fill="#FFCC33" stroke="#D98A00" stroke-width="2.500" stroke-linejoin="round"/><rect x="9" y="28" width="46" height="29" rx="4" fill="#E8362F"/><rect x="6" y="18" width="52" height="13" rx="3.500" fill="#FF5A4F"/><rect x="26" y="18" width="12" height="39" fill="#FFCC33"/><path d="M6 12l1.500 3.500L11 17l-3.500 1.500L6 22l-1.500-3.500L1 17l3.500-1.500zM58 30l1.300 3 3 1.300-3 1.300-1.300 3-1.300-3-3-1.300 3-1.300z" fill="#FFB300"/></svg></span>
         <div class="lb-banner-copy">
@@ -71,6 +82,7 @@
     </div>
 
     <div class="lb-me" id="lbMe"></div>
+    </div>
                   
             
         </div>
@@ -128,29 +140,6 @@
     </div>
     <!-- language option model -->
 
-    <div class="modal" tabindex="-1" id="search">
-        <div class="modal-dialog modal-fullscreen">
-            <div class="modal-content">
-                <div class="modal-body modal-level">
-                    <div class="modal-level-header">
-                        <a href="../../game/leaderboard/index.html" class="modal-level-header-close" data-bs-dismiss="modal" aria-label="Close">
-                            <span class="qf-icon-close"></span>
-                        </a>
-                    </div>
-                    <form action="../../search/index.html" id="search-form" method="GET">
-                    <div class="container-fluid box-wrapper">
-                        <h3 class="modal-level-title">Find Quiz</h3>
-                        <div class="input-group input-group-lg shadow">
-                                                        <input type="text" class="form-control main-search" name="q" id="search-box" name="serach_keyword" placeholder="Search..." value="">
-                            <button type="submit" class="btn button-primary"><span class="qf-icon-search"></span></button>
-                        </div>
-                    </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    
     <div class="res-confetti" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
 
     <div class="offcanvas offcanvas-bottom avatar-sheet" tabindex="-1" id="lbSheet" aria-labelledby="lbSheetTitle">
@@ -185,11 +174,11 @@
     <script src="../../theme/js/session.js?v=4"></script>
     <script src="../../theme/js/questions.js?v=1"></script>
     <script src="../../theme/js/game-demo.js?v=8"></script>
-    <script src="../../theme/js/i18n.js?v=9"></script>
+    <script src="../../theme/js/i18n.js?v=12"></script>
     <script src="../../theme/js/bootstrap.bundle.min.js"></script>
 
     <script src="../../theme/js/custom.js?v=3"></script>
     <script src="../../theme/js/leaderboard-config.js?v=4"></script>
-    <script src="../../theme/js/leaderboard.js?v=3"></script>
+    <script src="../../theme/js/leaderboard.js?v=6"></script>
 </body>
 </html>

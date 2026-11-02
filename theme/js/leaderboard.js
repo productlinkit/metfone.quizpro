@@ -35,7 +35,7 @@
     // Podium: 2nd, 1st, 3rd; an open spot while nobody holds it
     $id('lbPodium').innerHTML = [[1, 'silver'], [0, 'gold'], [2, 'bronze']].map(function (x) {
         var p = players[x[0]], rank = x[0] + 1;
-        return '<div class="lb-step ' + x[1] + (p && p.me ? ' is-me' : '') + (p ? '' : ' is-open') + '">' +
+        return '<div class="lb-step ' + x[1] + (p && p.me ? ' is-me' : '') + (p ? '' : ' is-open') + '" data-rank="' + rank + '">' +
             (rank === 1 ? '<span class="lb-step-crown qf-icon-crown"></span>' : '') +
             '<span class="lb-step-ava">' + (p ? ava(p) : '<span class="lb-open">?</span>') + '</span>' +
             '<div class="lb-pillar"><b class="lb-medal">' + rank + '</b>' +
@@ -49,16 +49,11 @@
     var rest = players.slice(3);
     $id('lbTable').hidden = !rest.length;
     $id('lbList').innerHTML = rest.map(function (p, i) {
-        return '<li class="lb-row' + (p.me ? ' is-me' : '') + '"><span class="lb-rank">' + (i + 4) + '</span><span class="lb-ava">' + ava(p) + '</span>' +
+        return '<li class="lb-row' + (p.me ? ' is-me' : '') + '" data-rank="' + (i + 4) + '"><span class="lb-rank">' + (i + 4) + '</span><span class="lb-ava">' + ava(p) + '</span>' +
             '<span class="lb-name">' + esc(p.name) + '</span><span class="lb-score">' + crown + fmt(p.score) + '</span></li>';
     }).join('');
 
-    // What the player stands to win, or has won
-    function nextGoal() {
-        if (myRank === 1) return t("You're in first place!");
-        var goalRank = myRank > 3 ? 3 : myRank - 1, target = players[goalRank - 1];
-        return f('{n} more points to reach Rank {r} and win {prize}', { n: fmt(target.score - me.score + 1), r: goalRank, prize: '<b>' + esc(t(prizeFor(goalRank).name)) + '</b>' });
-    }
+    // Before and after the season: what the player should do next, or what they won
     var status = '';
     if (state === 'empty') {
         status = '<div class="lb-note"><span class="lb-note-ico fa fa-trophy"></span><div><b>' + t('No champion yet') + '</b><p>' + t('Be the first to score and take the top spot.') + '</p></div></div>' +
@@ -67,12 +62,8 @@
         var mine = prizeFor(myRank);
         status = '<div class="lb-note"><span class="lb-note-ico fa ' + (mine ? 'fa-gift' : 'fa-flag-checkered') + '"></span><div><b>' + f('You finished #{r}', { r: myRank }) + '</b><p>' +
             (mine ? f('You won {prize}! Our team will contact you.', { prize: '<b>' + esc(t(mine.name)) + '</b>' }) : t('Play again next season to win a prize.')) + '</p></div></div>';
-    } else {
-        status = '<div class="lb-me-top"><span class="lb-ava">' + ava(me) + '</span>' +
-            '<span class="lb-me-score"><small>' + t('Your score') + '</small><b>' + fmt(me.score) + '</b></span>' +
-            '<span class="lb-me-rank"><small>' + t('Rank') + '</small><b>#' + myRank + '</b></span></div>' +
-            '<p class="lb-me-next">' + nextGoal() + '</p>';
     }
+    $id('lbMe').hidden = !status;
     $id('lbMe').innerHTML = status;
     var play = $id('lbPlay');
     if (play) play.addEventListener('click', function (e) {
@@ -91,6 +82,47 @@
     }).join('');
     var sheet = bootstrap.Offcanvas.getOrCreateInstance($id('lbSheet'));
     $id('btnPrizes').addEventListener('click', function () { sheet.show(); });
+
+    // Search players on this page: results replace the content below as you type
+    var bar = $id('lbSearch'), box = $id('lbSearchBox'), card = $id('lbSearchCard'), results = $id('lbSearchResults'), main = $id('lbMain');
+    function preview() {
+        var q = box.value.trim().toLowerCase();
+        card.hidden = !q;
+        main.hidden = !!q;
+        if (!q) { results.innerHTML = ''; return; }
+        var hits = players.map(function (p, i) { return { p: p, rank: i + 1 }; }).filter(function (h) { return h.p.name.toLowerCase().indexOf(q) !== -1; });
+        results.innerHTML = hits.length ? hits.map(function (h) {
+            return '<li><button type="button" class="lb-row' + (h.p.me ? ' is-me' : '') + '" data-rank="' + h.rank + '"><span class="lb-rank">' + h.rank + '</span><span class="lb-ava">' + ava(h.p) + '</span>' +
+                '<span class="lb-name">' + esc(h.p.name) + '</span><span class="lb-score">' + crown + fmt(h.p.score) + '</span></button></li>';
+        }).join('') : '<li class="lb-search-empty">' + t('No player found') + '</li>';
+    }
+    function closeSearch() { box.value = ''; preview(); bar.hidden = true; }
+    function showPlayer(rank) {
+        closeSearch();
+        var row = document.querySelector('#lbPodium [data-rank="' + rank + '"], #lbList [data-rank="' + rank + '"]');
+        if (!row) return;
+        row.scrollIntoView({ block: 'center' });
+        row.classList.remove('lb-flash');
+        void row.offsetWidth;
+        row.classList.add('lb-flash');
+    }
+    $id('btnSearch').addEventListener('click', function (e) {
+        e.preventDefault();
+        if (bar.hidden) { bar.hidden = false; box.focus(); } else { closeSearch(); }
+    });
+    $id('lbSearchClose').addEventListener('click', closeSearch);
+    box.addEventListener('input', preview);
+    box.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeSearch();
+        if (e.key !== 'Enter') return;
+        e.preventDefault();
+        var first = results.querySelector('[data-rank]');
+        if (first) showPlayer(first.getAttribute('data-rank'));
+    });
+    results.addEventListener('click', function (e) {
+        var b = e.target.closest('[data-rank]');
+        if (b) showPlayer(b.getAttribute('data-rank'));
+    });
 
     // Champions announced: confetti and a pop-up with the winner and the prize
     if (state === 'ended') {
